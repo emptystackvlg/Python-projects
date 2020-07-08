@@ -10,8 +10,8 @@ menu=g.buttonbox("                                 ВЫБЕРИТЕ  ФИГУР�
 def main_k():
     p=a*4
     w=a*a
-    return g.buttonbox(      "Периметр равен "+str(p) + "                                    Площадь равна "+str(w),
-                                   choices=["RESTART","QUIT"])
+    return g.msgbox(      "Периметр равен "+str(p) + "                                    Площадь равна "+str(w),
+                       
 
 def main_t():
     y = b + d + c
