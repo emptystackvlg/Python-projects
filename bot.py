@@ -9,11 +9,11 @@ print("Бот запущен")
 
 
 
-owm = OWM('cae9eaad6d7d0f30ada409a70e1756b9')
+owm = OWM('token')
 
 #не забыть поменять API  ключ
 
-bot = telebot.TeleBot('1217728629:AAFVe-1pLS4IFZHmuQgJVI19MxTNu1K9vOA')
+bot = telebot.TeleBot('token')
 
 
 link1 = telebot.types.InlineKeyboardMarkup()
