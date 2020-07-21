@@ -7,7 +7,7 @@ import time
 from pyowm.owm import OWM
 
 
-3 
+
 print("Бот запущен")
 
 
