@@ -1,15 +1,11 @@
 def factorial (x) :
     count = x       # счетчик для цикла вычисления факториала 
-    
-    i = int (1)     # счетчик чисел 
 
     sum = int (1)
 
     while count > 0 :
 
-        sum *= i 
-
-        i += 1
+        sum *= count
 
         count -= 1 
         
