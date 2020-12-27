@@ -27,9 +27,9 @@ def start_message(message):
 
     bot.send_message (message.chat.id,"Привет " + str(message.from_user.first_name) +  " !" , reply_markup = key_1)
 
-    #s = open ('hello.webp' , 'rb')
+    s = open ('hello.webp' , 'rb')
     
-    #bot.send_sticker(message.chat.id , s)
+    bot.send_sticker(message.chat.id , s)
 
 
 @bot.message_handler(content_types=['text',"audio","photo"])
