@@ -18,7 +18,6 @@ link.add (url)
 
 
 
-
 print ("Бот запущен")
 
 @bot.message_handler(commands=['start'])
@@ -38,7 +37,9 @@ def start_message(message):
 
 def send_text(message):
     if message.text.lower() == "написать пожелание":
+        
         bot.send_message (message.chat.id,"Отлично , чего бы Вы хотели пожелать ?")
+        
         bot.register_next_step_handler (message , save_text)
         
 
@@ -46,6 +47,7 @@ def send_text(message):
     elif message.text.lower () == "написать ещё одно пожелание" :
 
         bot.send_message (message.chat.id , "Ладно , что на этот раз ?")
+        
         bot.register_next_step_handler (message , save_text )
 
 
