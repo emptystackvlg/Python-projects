@@ -1,7 +1,7 @@
 import telebot
 
 
-bot = telebot.TeleBot('1479693109:AAGTRGTHO7ktN1_7_2izly1g2RfNK-IiZeE')
+bot = telebot.TeleBot('token')
 
 
 key_1 = telebot.types.ReplyKeyboardMarkup(True)
@@ -56,7 +56,7 @@ def send_text(message):
 
 def save_text (message) :
     
-    chat = "-291625440"
+    chat = "group_id"
     bot.forward_message (chat, message.chat.id,message.message_id)
 
     bot.send_message (message.chat.id , "Я записал ")
