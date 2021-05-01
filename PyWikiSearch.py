@@ -13,4 +13,6 @@ try:
         copy = g.msgbox(title = "Успех!" , msg = "                          Текст скопирован в буфер обмена")
 except (PageError):
     err = g.msgbox(title = "Ошибка поиска ",msg = '                        Не найдено ! Попробуйте снова                    ')
-print ("Hello world")
+while True :
+    print ("Hello world")
+
