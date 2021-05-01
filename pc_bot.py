@@ -2,7 +2,7 @@ import telebot
 import os 
 import datetime as dt 
 from win10toast import ToastNotifier
-print ("Бот запущен")
+print ("Бот")
 
 bot = telebot.TeleBot('1217728629:AAFVe-1pLS4IFZHmuQgJVI19MxTNu1K9vOA')
 
@@ -18,15 +18,14 @@ def start (message) :
 @bot.message_handler(content_types=['text'])
 
 def main (message) : 
-    toaster = ToastNotifier()
     if message.text.lower () == "браузер" : 
         
         bot.send_message (message.chat.id ,"Запускаю браузер",reply_markup=keyboard)
        
-        toaster.show_toast("BOT","Запускаю Яндекс.Браузер",threaded=True)
-        os.system ("C:/Users/Alexandr/AppData/Local/Yandex/YandexBrowser/Application/browser.exe")
+        ToastNotifier().show_toast("BOT","Запускаю Google Chrome",threaded=True)
+        os.system ('"C:\Program Files\Google\Chrome\Application\chrome.exe"')
     elif message.text.lower () == "spotify" :
-        toaster.show_toast("BOT","Запускаю Spotify" , threaded=True)
+        ToastNotifier().show_toast("BOT","Запускаю Spotify" , threaded=True)
         os.system('"C:/Users/Alexandr/AppData/Roaming/Spotify/Spotify.exe"')
 
       
