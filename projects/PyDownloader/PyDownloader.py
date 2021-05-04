@@ -1,0 +1,21 @@
+from __future__ import unicode_literals
+import youtube_dl
+import easygui as g
+import pyperclip
+import os
+from win10toast import ToastNotifier as TN 
+print ("\a")
+url = g.buttonbox(title = 'Ссылка на файл' , msg = "               Скопируйте ссылку и нажмите кнопку 'СКАЧАТЬ'",
+choices = ['  СКАЧАТЬ  '])
+if url == "  СКАЧАТЬ  " :
+    link = pyperclip.paste()
+if link == '':
+    fail = g.msgbox(title="Ошибка!" , msg = "  В буфере нет ссылки  , скопируйте ссылку  и попробуйте снова")
+    quit(0)
+save = g.diropenbox(title = "Выберите папку для сохранения")
+ydl_opts = {}
+with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+    os.chdir(save)
+    ydl.download([str(link)])
+notify = TN()
+notify.show_toast ("Успех!!!","Ваш файл успешно скачался",duration=8)
