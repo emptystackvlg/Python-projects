@@ -2,7 +2,6 @@
 #для корректной работы вам нужно устаyовить библиотеку  easygui (pip install easygui)
 import easygui as g
 
-
 menu=g.buttonbox("                                 ВЫБЕРИТЕ  ФИГУРУ          ",
                     choices=["SQUARE","RECTANGLE","TRIANGLE","KEYSTONE"])
 
