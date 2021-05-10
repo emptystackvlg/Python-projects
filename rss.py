@@ -21,13 +21,14 @@ def start(message):
 def main(message):
     
     if message.text.lower() == "читать новости":
-       NewsFeed = feedparser.parse("https://4pda.ru/feed/")
+       NewsFeed = feedparser.parse("https://bloknot-volgograd.ru/rss_news.php")
        for i in range(0,(len(NewsFeed.entries))):
             entry = NewsFeed.entries[i]
             bot.send_message(message.chat.id, entry.link,reply_markup = switch)
             i += 1
 
-  
+    elif message.text.lower () == '<<<------назад в главное меню' : 
+        bot.send_message(message.chat.id, "Возврат в главное меню",reply_markup=keyboard)
 
 
 
