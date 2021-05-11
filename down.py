@@ -42,12 +42,15 @@ def down():
         if link == '':
            Dialog.show()
         save = g.diropenbox(title="Выберите папку для сохранения")
-        ydl_opts = {}
+        ydl_opts = {
+                'quiet': True
+                 }
         def open () :
             os.startfile(save)
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             os.chdir(save)
             ydl.download([str(link)])
+            
             tf().show_toast("PyDownloader","Ваш файл скачался , нажмите чтобы открыть",duration=10,threaded=True, 
             callback_on_click=open)
     except:
