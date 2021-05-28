@@ -51,6 +51,8 @@ def down():
             os.chdir(save)
             ydl.download([str(link)])
             
+          
+            
             tf().show_toast("PyDownloader","Ваш файл скачался , нажмите чтобы открыть",duration=10,threaded=True, 
             callback_on_click=open)
     except:

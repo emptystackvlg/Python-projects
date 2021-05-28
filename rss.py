@@ -32,7 +32,7 @@ def main(message):
         news (i)
     elif message.text.lower() == "далее------>>>" :
         i += 1
-        news(i)
+        news(message ,i)
 
     elif message.text.lower () == '<<<------назад в главное меню' : 
         bot.send_message(message.chat.id, "Возврат в главное меню",reply_markup=keyboard)
