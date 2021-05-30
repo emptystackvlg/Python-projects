@@ -16,7 +16,7 @@ owm = OWM('api key')
 
 #не забыть поменять API  ключ
 
-bot = telebot.TeleBot('token')
+bot = telebot.TeleBot('1192738735:AAG-n0SkhhJWqoA4PcHbST-u7FhHWLMlz4k')
 
 
 link1 = telebot.types.InlineKeyboardMarkup()
