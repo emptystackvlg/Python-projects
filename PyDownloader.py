@@ -16,3 +16,4 @@ with youtube_dl.YoutubeDL(ydl_opts) as ydl:
     os.chdir(save)
     ydl.download([str(link)])
 info = g.msgbox (title = "Успех! ",msg="Ваш файл скачался , и находится по пути:" + "\n" + save)
+print ("HELLO WORLD")
