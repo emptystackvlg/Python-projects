@@ -30,5 +30,5 @@ def password (message) :
         return 0
     else : 
         bot.send_message (message.chat.id , "Неверный пароль , попробуйте ещё раз !" , reply_markup=keyboard) 
-
+asdadasd
 bot.polling (none_stop=True)
