@@ -1,5 +1,6 @@
 import telebot
-from telebot import types 
+from telebot import types
+from psutil import virtual_memory
 bot = telebot.TeleBot ('1763819681:AAE_wX-zn4fTYnhiwmPxpGasvg_z9l8nQ7w')
 
 
@@ -20,7 +21,10 @@ def send (message) :
     if message.text.lower() == 'ввести пароль' :
         bot.send_message(message.chat.id , "Введите пароль",reply_markup=False)
         bot.register_next_step_handler(message,password)
-
+    elif message.text.lower () == 'тест' : 
+        memoryUse =virtual_memory()[4]/2.**30
+        mem = float('{:.2f}'.format(memoryUse))
+        bot.send_message (message.chat.id ,"Свободно памяти : " + str (mem) + " GB" )
 
 
 def password (message) : 
@@ -30,5 +34,5 @@ def password (message) :
         return 0
     else : 
         bot.send_message (message.chat.id , "Неверный пароль , попробуйте ещё раз !" , reply_markup=keyboard) 
-asdadasd
+
 bot.polling (none_stop=True)
