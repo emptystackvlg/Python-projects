@@ -6,7 +6,6 @@ from wikipedia.exceptions import PageError , DisambiguationError
 import time
 from pyowm.owm import OWM
 
-
 print("Бот запущен")
 
 
@@ -23,11 +22,10 @@ link1 = telebot.types.InlineKeyboardMarkup()
 url1 = (telebot.types.InlineKeyboardButton(text = "Перейти на сайт", url = "https://soskavlg.github.io/"))
 link1.add (url1)
 
-
-
 link3 = telebot.types.InlineKeyboardMarkup()
 url3 = (telebot.types.InlineKeyboardButton (text = "Перейти на  GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/bot.py") )
 link3.add (url3)
+
 
 
 link4 = telebot.types.InlineKeyboardMarkup()
