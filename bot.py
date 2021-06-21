@@ -14,8 +14,7 @@ wikipedia.set_lang ('ru')
 owm = OWM('api key')
 
 #не забыть поменять API  ключ
-
-bot = telebot.TeleBot('1192738735:AAG-n0SkhhJWqoA4PcHbST-u7FhHWLMlz4k')
+bot = telebot.TeleBot('api key ')
 
 
 link1 = telebot.types.InlineKeyboardMarkup()
