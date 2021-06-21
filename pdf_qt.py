@@ -9,6 +9,8 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(400, 300)
+        Dialog.setMaximumSize(QtCore.QSize(400, 300))
+        Dialog.setMinimumSize(QtCore.QSize(400,300))
         Dialog.setStyleSheet("background {\n"
 "rgb(223, 238, 237)}")
         self.pushButton = QtWidgets.QPushButton(Dialog)
