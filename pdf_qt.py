@@ -38,10 +38,11 @@ class Ui_Dialog(object):
 
 def word2pdf () :
     try :
+        indirec = g.fileopenbox ("Выберите файл .docx")
         wdFormatPDF = 17
 
         word = win32com.client.Dispatch('Word.Application')
-        indirec = g.fileopenbox ("Выберите файл .docx")
+      
         
         doc = word.Documents.Open(indirec)
         
