@@ -16,7 +16,8 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(152, 244)
-        Dialog.setMaximumSize(QtCore.QSize(400, 300))
+        Dialog.setMaximumSize(QtCore.QSize(152,244))
+        Dialog.setMinimumSize(QtCore.QSize(152,244))
         Dialog.setStyleSheet("background {\n"
 "rgb(223, 238, 237)}")
         self.download = QtWidgets.QPushButton(Dialog)
