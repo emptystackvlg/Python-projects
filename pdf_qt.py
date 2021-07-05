@@ -40,6 +40,7 @@ class Ui_Dialog(object):
 
 def word2pdf () :
     try :
+        Dialog.hide()
         indirec = g.fileopenbox ("Выберите файл .docx")
         wdFormatPDF = 17
 
@@ -59,6 +60,7 @@ def word2pdf () :
 
 def image2pdf () :
     try :
+        Dialog.hide()
         num = g.enterbox (title = "Количество изображений " , msg = "Введите количество изображений которые хотите добавить ")
         n = int (num)
 
@@ -101,3 +103,5 @@ if __name__ == "__main__":
     main_thread.start
     main_thread.join
     sys.exit(app.exec())
+
+
