@@ -54,7 +54,7 @@ def word2pdf () :
         doc.Close()
         word.Quit()
         Dialog.show()
-    except : 
+    except: 
         Dialog.show()
     return 0 
 
