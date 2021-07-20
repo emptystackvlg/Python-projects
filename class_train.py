@@ -31,7 +31,7 @@ class Hot_Dog () :
         print ("Введите нужную сумму и подтвердите операцию , введя 'ОПЛАТИТЬ' :" + "\n")
         check_price = int (input("> "))        
         сonfirm = str (input("> "))   
-        print ("Операция  успешно выполнена ! " + "\a\n")
+        print ("Операция  успешно выполнена ! " + "\n")
 
     def take (self):
         print ("Получите и распишитесь :" + "\n" + "сосиска из " + self.meat + " c " + self.addons + " и " + self.souse + "\n")
