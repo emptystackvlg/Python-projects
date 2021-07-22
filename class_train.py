@@ -1,5 +1,6 @@
-import os 
-import time 
+import os
+import time
+
 os.system("cls")
 
 class Hot_Dog () :
@@ -11,7 +12,11 @@ class Hot_Dog () :
 
     def cook (self) : 
         print ("Ваша сосиска готовится" + "\n") 
-        time.sleep(5)
+        i = int (0)
+        for i in range (1,6) :
+            print ("." * i)
+            time.sleep(1)
+        os.system ("cls")
 
     def pay (self) :
         final_price = int(0)
@@ -71,6 +76,7 @@ if souse_choice == 1 :
     third = "кетчуп"    
 elif souse_choice == 2 :
     third = "горчица"
+os.system ("cls")
 
 My_Hot_Dog = Hot_Dog(first,second,third)
 
