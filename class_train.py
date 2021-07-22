@@ -39,10 +39,42 @@ class Hot_Dog () :
     def bay (self) : 
         print ("Спасибо за покупку , всего хорошего !!!!")
 
-My_Hot_Dog = Hot_Dog("курица" , "сыр" , "горчица")
 
+
+
+
+
+os.system("cls")
+print ("Выберите мясо , из которого будет сделана сосиска :  " + "\n" + "1. Курица " + "\n" + "2. Свинина" + "\n" + "3. Говядина " + "\n")
+meat_choice = int (input("> "))
+if meat_choice == 1 :
+    first = "курица"
+elif meat_choice == 2 :
+    first = "свинина" 
+elif meat_choice == 3 :
+    first = "говядина"
+os.system("cls")
+
+print ("\n" + "Выберите дополнительный ингредиент : " + "\n" + "1. Сыр " + "2. Капуста" + "3. Лук" + "\n")
+addons_choice = int (input ("> "))
+if addons_choice == 1 :
+    second = "сыр"
+elif addons_choice == 2 :
+    second = "капуста"
+elif addons_choice == 3 :
+    second = "лук"
+os.system("cls")
+
+print ("\n" + "Выберите соус : " + "\n" + "1. Кетчуп " + "2. Горчица" + "\n")
+souse_choice = int (input ("> "))
+if souse_choice == 1 :
+    third = "кетчуп"    
+elif souse_choice == 2 :
+    third = "горчицп"
+
+My_Hot_Dog = Hot_Dog(first,second,third)
+
+My_Hot_Dog.cook ()
 My_Hot_Dog.pay()
-My_Hot_Dog.cook()
 My_Hot_Dog.take()
 My_Hot_Dog.bay()
-
