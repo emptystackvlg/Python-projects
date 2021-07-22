@@ -55,7 +55,7 @@ elif meat_choice == 3 :
     first = "говядина"
 os.system("cls")
 
-print ("\n" + "Выберите дополнительный ингредиент : " + "\n" + "1. Сыр " + "2. Капуста" + "3. Лук" + "\n")
+print ("\n" + "Выберите дополнительный ингредиент : " + "\n" + "1. Сыр " +"\n" + "2. Капуста" + "\n" + "3. Лук" + "\n")
 addons_choice = int (input ("> "))
 if addons_choice == 1 :
     second = "сыр"
@@ -70,7 +70,7 @@ souse_choice = int (input ("> "))
 if souse_choice == 1 :
     third = "кетчуп"    
 elif souse_choice == 2 :
-    third = "горчицп"
+    third = "горчица"
 
 My_Hot_Dog = Hot_Dog(first,second,third)
 
