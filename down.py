@@ -1,14 +1,14 @@
 from __future__ import unicode_literals
 from logging import ERROR
-import os
+from os import startfile , chdir
 
 import threading 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from win10toast_click import ToastNotifier as tf 
 
-import youtube_dl
-import easygui as g
-import pyperclip
+from youtube_dl import YoutubeDL
+from easygui import diropenbox
+from pyperclip import paste
 
 
 
@@ -43,18 +43,18 @@ class Ui_Dialog(object):
 def down():
     try:
         Dialog.hide()
-        link = pyperclip.paste()
+        link = paste()
         if link == '':
            Dialog.show()
-        save = g.diropenbox(title="Выберите папку для сохранения")
+        save = diropenbox(title="Выберите папку для сохранения")
         ydl_opts = {
                 'quiet': True
                  }
         def open () :
-            os.startfile(save)
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            startfile(save)
+        with YoutubeDL(ydl_opts) as ydl:
             tf().show_toast("PyDownloader","Скачивание началось",duration=10,threaded=True)
-            os.chdir(save)
+            chdir(save)
             ydl.download([str(link)])
             
             tf().show_toast("PyDownloader","Ваш файл скачался , нажмите чтобы открыть",duration=10,threaded=True, 
