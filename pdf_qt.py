@@ -1,5 +1,5 @@
-import easygui as g 
-import win32com.client
+from easygui import enterbox , fileopenbox , filesavebox
+from win32com.client import Dispatch
 from PIL import Image
 import threading 
 from PyQt6 import QtCore, QtGui, QtWidgets
@@ -41,15 +41,15 @@ class Ui_Dialog(object):
 def word2pdf () :
     try :
         Dialog.hide()
-        indirec = g.fileopenbox ("Выберите файл .docx")
+        indirec = fileopenbox ("Выберите файл .docx")
         wdFormatPDF = 17
 
-        word = win32com.client.Dispatch('Word.Application')
+        word = Dispatch('Word.Application')
       
         
         doc = word.Documents.Open(indirec)
         
-        outdirec = g.filesavebox ("Выберите место для сохранения")
+        outdirec = filesavebox ("Выберите место для сохранения")
         doc.SaveAs(outdirec + ".pdf", FileFormat=wdFormatPDF)
         doc.Close()
         word.Quit()
@@ -61,22 +61,22 @@ def word2pdf () :
 def image2pdf () :
     try :
         Dialog.hide()
-        num = g.enterbox (title = "Количество изображений " , msg = "Введите количество изображений которые хотите добавить ")
+        num = enterbox (title = "Количество изображений " , msg = "Введите количество изображений которые хотите добавить ")
         n = int (num)
 
-        indir = g.fileopenbox ("Выберите изображение в формате JPEG или PNG")
+        indir = fileopenbox ("Выберите изображение в формате JPEG или PNG")
         image1 = Image.open(str(indir))
         im1 = image1.convert ('RGB')
         n -= 1
         imagelist = []
 
         while n!=0 :
-            indir_1 = g.fileopenbox ("Выберите изображение в формате JPEG или PNG")
+            indir_1 = fileopenbox ("Выберите изображение в формате JPEG или PNG")
             image2 = Image.open(str(indir_1))
             im2 = image2.convert ('RGB')
             imagelist.append (im2)
             n -= 1
-        todir = g.filesavebox("Выберите место для сохранения")
+        todir = filesavebox("Выберите место для сохранения")
         im1.save(str(todir) + ".pdf" , save_all= True , append_images=imagelist)
         Dialog.show()
     except:
