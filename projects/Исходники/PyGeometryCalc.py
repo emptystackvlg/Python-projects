@@ -11,6 +11,7 @@ def main_k():
     p=a*4
     w=a*a
     return g.msgbox(      "Периметр равен "+str(p) + "                                    Площадь равна "+str(w))
+                       
 
 def main_t():
     y = b + d + c

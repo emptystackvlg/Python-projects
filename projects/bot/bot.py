@@ -6,29 +6,25 @@ from wikipedia.exceptions import PageError , DisambiguationError
 import time
 from pyowm.owm import OWM
 
-
-
 print("Бот запущен")
 
 
 wikipedia.set_lang ('ru')
 
-owm = OWM('cae9eaad6d7d0f30ada409a70e1756b9')
+owm = OWM('api key')
 
 #не забыть поменять API  ключ
-
-bot = telebot.TeleBot('1217728629:AAFVe-1pLS4IFZHmuQgJVI19MxTNu1K9vOA')
+bot = telebot.TeleBot('api key ')
 
 
 link1 = telebot.types.InlineKeyboardMarkup()
 url1 = (telebot.types.InlineKeyboardButton(text = "Перейти на сайт", url = "https://soskavlg.github.io/"))
 link1.add (url1)
 
-
-
 link3 = telebot.types.InlineKeyboardMarkup()
 url3 = (telebot.types.InlineKeyboardButton (text = "Перейти на  GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/bot.py") )
 link3.add (url3)
+
 
 
 link4 = telebot.types.InlineKeyboardMarkup()
@@ -81,25 +77,9 @@ link12 = telebot.types.InlineKeyboardMarkup()
 url12 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" , url = "https://github.com/SoskaVLG/CPP-projects/blob/master/Child_Train.cpp"))
 link12.add(url12)
 
-link13 = telebot.types.InlineKeyboardMarkup()
-url13 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/PDF.py"))
-link13.add (url13)
-
-pwm1 = telebot.types.InlineKeyboardMarkup()
-pwm_url1 = (telebot.types.InlineKeyboardButton (text = "Открыть статью" , url = "https://soskavlg.github.io/page3.html"))
-pwm1.add (pwm_url1)
-
-
-pwm2 = telebot.types.InlineKeyboardMarkup ()
-pwm_url2 = (telebot.types.InlineKeyboardButton (text = "Открыть прошивку" , url = "https://github.com/SoskaVLG/Arduino-projects/blob/master/PWM.ino" ))
-pwm2.add (pwm_url2)
-
-tweak_url = telebot.types.InlineKeyboardMarkup ()
-tw_url = (telebot.types.InlineKeyboardButton (text = "Исходный код на GitHub" , url = "https://github.com/SoskaVLG/CPP-projects/blob/master/Tweaker_RU.cpp"))
-tweak_url.add (tw_url)
 
 mainkey = telebot.types.ReplyKeyboardMarkup(True)
-mainkey.row ('Ссылки и контакты' , 'Arduino проекты')
+mainkey.row ('Ссылки и контакты')
 mainkey.row ('Основные функции ')
 mainkey.row ('Самописные программы')
 mainkey.row ('| ТЕХНИЧЕСКАЯ ПОДДЕРЖКА |')
@@ -107,7 +87,7 @@ mainkey.row ('| ТЕХНИЧЕСКАЯ ПОДДЕРЖКА |')
 
 
 keyboard1 = telebot.types.ReplyKeyboardMarkup(True)
-keyboard1.row('<<--- Назад в главное меню')
+keyboard1.row('<<--- Назад в гланое меню')
 keyboard1.row ('Каталог программ')
 keyboard1.row ('Узнать погоду','Наборы стикеров')
 keyboard1.row ('Перевод текста' , 'Поиск по Wikipedia')
@@ -126,7 +106,7 @@ keyboard2.row ('4.Клиент Telegram для Windows')
 
 
 keyboard3 = telebot.types.ReplyKeyboardMarkup (True)
-keyboard3.row('<<--- Назад в главное меню')
+keyboard3.row('<<--- Назад в гланое меню')
 keyboard3.row ('Официальный сайт')
 keyboard3.row ('Исходный код на GitHub')
 keyboard3.row ('ПО и API с помощью которых был написан бот')
@@ -134,7 +114,7 @@ keyboard3.row ('ПО и API с помощью которых был написа
 
 
 progm1 = telebot.types.ReplyKeyboardMarkup (True)
-progm1.row ('<<--- Назад в главное меню')
+progm1.row ('<<--- Назад в гланое меню')
 progm1.row ('@ Аудио и видео плееры @','@ Работа с мультимедиа @')
 progm1.row ('@ Геймерам @','@ Мессенджеры @')
 progm1.row ('Следующая страница --->>')
@@ -233,29 +213,24 @@ progm14.row ('@ Visual Studio @' , '@ Komodo IDE @')
 
 
 progm15 = telebot.types.ReplyKeyboardMarkup(True)
-progm15.row ('<<--- Назад в главное меню')
-progm15.row ("Windows 10 Tweak Tool")
-progm15.row ('PyDownloader','PyHWMonitor')
+progm15.row ('<<--- Назад в гланое меню')
+progm15.row ('PySpeedtest' , 'PyDownloader')
+progm15.row ('PyGeometryCalc' , 'PyHWMonitor')
 progm15.row('<<--ПОКАЗАТЬ ЕЩЕ ПРОГРАММЫ-->>')
 
 
 
 progm16 = telebot.types.ReplyKeyboardMarkup(True)
-progm16.row ('<<--- Назад в главное меню')
+progm16.row ('<<--- Назад в гланое меню')
 progm16.row ('PyTranslate' , 'PyWikiSearch')
-progm16.row('PyReminder' , 'PyPDFConverter')
-progm16.row ('Тренажер для детей', 'PyQRMaker')
+progm16.row('PyReminder' , 'PyQRMaker')
+progm16.row ('Тренажер для детей')
 
-
-
-ardprojects = telebot.types.ReplyKeyboardMarkup (True)
-ardprojects.row('<<--- Назад в главное меню')
-ardprojects.row ('Плавное изменение яркости светодиодов')
 
 
 
 stick1 = telebot.types.ReplyKeyboardMarkup(True)
-stick1.row('<<--- Назад в главное меню')
+stick1.row('<<--- Назад в гланое меню')
 stick1.row('Meme Pack' , 'STALKER Pack' , 'Путин Pack')
 stick1.row('Fuck RKN Pack' , 'Tom Pack')
 
@@ -274,13 +249,20 @@ language.row ('Немецкий' , 'Итальянский' , 'Испански�
 
 
 
+
+
 @bot.message_handler(commands=['start'])
 
 def start_message(message):
     s = open ('hello.webp' , 'rb')
 
-    bot.send_message(473909224,"Привет " + str(message.from_user.first_name) +  " !",reply_markup = mainkey)
+    bot.send_message(message.chat.id,"Привет " + str(message.from_user.first_name) +  " !",reply_markup = mainkey)
     bot.send_sticker(message.chat.id , s)
+
+
+
+
+
 
 
 
@@ -290,6 +272,8 @@ def start_message(message):
 
 
 def send_text(message):
+
+    f = open('кот.jpg', 'rb')
 
 
 
@@ -627,27 +611,11 @@ def send_text(message):
         bot.send_message(message.chat.id , "PyQRMaker - программа для создания QR  кодов из ссылок или текста" + "\n" + "https://sourceforge.net/projects/pyqrmaker/")
         bot.send_message(message.chat.id , "Исходный код :" , reply_markup = link11)
 
-    elif message.text.lower () == "windows 10 tweak tool" :
-        bot.send_message (message.chat.id , "Windows 10 Tweak Tool - простая утилита для отлключения ненужных служб и функций в Windows 10 , для работы нужен пакет Visual C++ Redistributable 2019" + "\n" + "https://sourceforge.net/projects/windows-10-tweak-tool/")
-        bot.send_message (message.chat.id , "Исходный код :" , reply_markup = tweak_url)
 
     elif message.text.lower () == "тренажер для детей" :
         bot.send_message (message.chat.id , 'Тренажер на знание таблицы умножения  для детей . Написан на C++ . Является программой с CLI интерфейсом' + "\n" + "https://sourceforge.net/projects/c-kids-tutor/")
         bot.send_message(message.chat.id , "Исходный код : " , reply_markup = link12)
 
-
-    elif message.text.lower () == "pypdfconverter" :
-        bot.send_message (message.chat.id , "PyPDFConverter - программа для создания PDF из документов MS Word или изображений " + "\n" + "https://sourceforge.net/projects/pypdfconvert")
-        bot.send_message(message.chat.id , "Исходный код : " , reply_markup = link13)
-
-
-
-    elif message.text.lower () == 'плавное изменение яркости светодиодов' :
-        bot.send_message (message.chat.id , "Вот статья на сайте : " , reply_markup = pwm1 )
-        bot.send_message (message.chat.id , "Прошивка : " , reply_markup = pwm2 )
-        bot.send_message (message.chat.id , "Схема подключения : " , reply_markup = ardprojects)
-        pwm = open ('PWM.png' , 'rb')
-        bot.send_photo (message.chat.id , pwm)
 
 
 
@@ -692,7 +660,7 @@ def send_text(message):
         bot.send_message(message.chat.id, "Возврат к категориям (стр № 2): ", reply_markup=progm11)
 
 
-    elif message.text.lower() == "<<--- назад в главное меню":
+    elif message.text.lower() == "<<--- назад в гланое меню":
         bot.send_message(message.chat.id, "Возврат в главное меню : " , reply_markup = mainkey)
 
 
@@ -817,22 +785,6 @@ def send_text(message):
 
 
 
-    elif message.text.lower () == "arduino проекты" :
-        bot.send_message (message.chat.id , "Вот список : " , reply_markup = ardprojects)
-
-
-    #elif message.text.lower() == 'новости' :
-        #url = "https://meduza.io/en/brief/2018/07/16/the-real-russia-today"
-
-        #article = meduza.get(url)
-
-        #c = int (1)
-        #for article in meduza.section('news', n=10, lang='ru'):
-            #bot.send_message(message.chat.id , str(c)  + " )" + "\n" + (f"  '{article['title']}'" ) + "\n", reply_markup = keyboard1 )
-            #bot.send_message(message.chat.id , "<<<----------------------------------------------------->>>")
-            #c += 1
-        #bot.send_message(message.chat.id , "Новости предоставлены изданием Meduza \n https://meduza.io/" )
-
 
     else:
         bot.send_message(message.chat.id , "Ошибочка вышла :(  , попробуйте ещё раз " , reply_markup = mainkey)
@@ -875,13 +827,14 @@ def weather(message) :
 
         elif 315 <= d <= 360 :
             v = "северо западный"
-
-
+        
+        w = open('owm.jpg', 'rb')
         weather.status
         translator = Translator(to_lang="Russian")
-        bot.send_message(message.chat.id, "Сейчас в городе  " + message.text + "\n" + "Температура воздуха :  " + str(t) + " °С " + "\n" + "Скрость  и направление ветра :  " + str(s) + " м/с , "  + v)
+        trans = translator.translate(weather.status.lower())
+        bot.send_message(message.chat.id, "Сейчас в городе  " + message.text + "\n" + "Температура воздуха :  " + str(t) + " °С " + " и " + str(trans) + "\n" + "Скрость  и направление ветра :  " + str(s) + " м/с , "  + v)
         bot.send_message(message.chat.id , "По данным Open Weather" , reply_markup = keyboard1)
-
+        bot.send_photo(message.chat.id ,w)
     except(NotFoundError):
         bot.send_message(message.chat.id , "Город не найден" )
 
@@ -901,7 +854,7 @@ def wiki(message) :
         bot.send_document(message.chat.id , sad , reply_markup = keyboard1 )
     except(DisambiguationError):
         bot.send_message(message.chat.id ,"Ваш запрос имеет множество значений , пожалуйста укажите точнее , то что хотите найти")
-
+     
 
 
 
@@ -909,7 +862,6 @@ def tran (message):
     translator = Translator(to_lang= 'en' , from_lang = 'ru')
     trans = translator.translate(str(message.text))
     bot.send_message (message.chat.id , "Результат перевода : " + "\n" + "\n"  + str(trans))
-
 
 
 
