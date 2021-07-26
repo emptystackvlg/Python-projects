@@ -3,7 +3,7 @@ import telebot
 
 print("Бот работает")
 
-bot = telebot.TeleBot('1763819681:AAHp6CEje8vyPNti_uMEQ2mNb7vOevX8Ui4')
+bot = telebot.TeleBot('')
 
 keyboard = telebot.types.ReplyKeyboardMarkup(True)
 keyboard.row ("ЧИТАТЬ НОВОСТИ")
