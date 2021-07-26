@@ -1,7 +1,9 @@
 from urllib.request import urlretrieve as download
-from easygui import diropenbox
+from easygui import diropenbox , msgbox
 from os import chdir , system , remove
 from time import sleep 
+import subprocess
+
 main_tuple = (  'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user' , 'https://sourceforge.net/projects/qbittorrent/files/qbittorrent-win32/qbittorrent-4.3.6/qbittorrent_4.3.6_x64_setup.exe/download',            
                 'https://download.scdn.co/SpotifySetup.exe','https://telegram.org/dl/desktop/win64','https://storage.googleapis.com/media.amperka.com/arduino-ide/arduino-latest-windows.exe',
                 'http://www.hibitsoft.ir/HiBitUninstaller/HiBitUninstaller-setup-2.6.15.exe',
@@ -31,4 +33,15 @@ def clean_dir(length):
         remove ( str(file_number) + ".exe")
         print ("Файл номер " + str (file_number) + " успешно удален" + "\n")
 
-clean_dir(len(main_tuple))
+def install_apps (lenght):
+    number = int (0)
+    path = diropenbox()
+    chdir (path)
+    for number in range(lenght):
+        name = str(number) + ".exe"
+        subprocess.call(name, shell=True)
+        pause = msgbox ("Продолжить ?")
+        number += 1
+
+
+install_apps(len(main_tuple))

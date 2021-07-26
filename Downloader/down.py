@@ -12,9 +12,6 @@ from pyperclip import paste
 
 
 
-
-
-
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
