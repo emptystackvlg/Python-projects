@@ -98,6 +98,7 @@ def install_apps (lenght):
                         else: 
                                 break
                         number += 1
+                tf().show_toast("PyInstaller", "Установка завершена" ,duration=5 , threaded=True)
                 MainWindow.show ()
         except :
                 MainWindow.show ()
