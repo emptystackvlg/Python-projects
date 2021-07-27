@@ -44,7 +44,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "PyInstaller"))
         self.Download.setText(_translate("MainWindow", "Скачать\n"
 "программы"))
         self.Install.setText(_translate("MainWindow", "Установить\n"
@@ -61,7 +61,7 @@ main_tuple = (  'https://code.visualstudio.com/sha/download?build=stable&os=win3
                 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=245029_d3c52aa6bfa54d3ca74e617f18309292','https://files3.codecguide.com/K-Lite_Codec_Pack_1635_Full.exe',
                 'https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.1.2/npp.8.1.2.Installer.exe','https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.0.1-Full-Installer-x64.exe',
                 'https://www.tracker-software.com/product/pdf-xchange-viewer/download?fileid=446','https://download.sublimetext.com/Sublime%20Text%20Build%203211%20x64%20Setup.exe',
-                'https://download.aida64.com/aida64extreme633.exe' , 'https://www.7-zip.org/a/7z1900-x64.exe'
+                'https://download.aida64.com/aida64extreme633.exe' , 'https://www.7-zip.org/a/7z1900-x64.exe' , 
                 )
 
 def get_apps (links) : 
