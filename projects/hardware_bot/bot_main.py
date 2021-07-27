@@ -1,7 +1,7 @@
 import telebot
 from telebot import types
 from psutil import virtual_memory
-bot = telebot.TeleBot ('1763819681:AAE_wX-zn4fTYnhiwmPxpGasvg_z9l8nQ7w')
+bot = telebot.TeleBot ('')
 
 
 keyboard = telebot.types.ReplyKeyboardMarkup(True)
