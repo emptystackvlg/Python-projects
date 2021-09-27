@@ -37,6 +37,9 @@ class Hot_Dog ():
               " У.Е. , прежде чем получить сосиску" + "\n")
         print("Введите нужную сумму и подтвердите операцию , введя 'ОПЛАТИТЬ' :" + "\n")
         check_price = int(input("> "))
+        if int (check_price) != final_price :
+            print ("Не хватает")
+            exit (0)
         сonfirm = str(input("> "))
         print("Операция  успешно выполнена ! " + "\n")
 
