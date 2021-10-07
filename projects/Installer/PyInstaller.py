@@ -1,12 +1,20 @@
+from os import chdir , remove , system
 from urllib.request import urlretrieve as download
-from easygui import diropenbox , ccbox
-from os import chdir , remove
-from win10toast import ToastNotifier as tf
-import subprocess
-from PyQt6 import QtCore, QtGui, QtWidgets
-from easygui.boxes.choice_box import make_list_or_none
-
-
+try :
+        from easygui import diropenbox , ccbox
+        from win10toast import ToastNotifier as tf
+        import subprocess
+        from PyQt6 import QtCore, QtGui, QtWidgets
+        from easygui.boxes.choice_box import make_list_or_none
+except :
+        system ("pip install easygui")
+        system ("pip install win10toast")
+        system ("pip install PyQt6")
+        system ("pip install PySide6")
+        system ("cls")
+        print ("Библиотеки установлены, перезапустите программу")
+        system ("cls")
+        system ("pause")
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("PyInstaller")

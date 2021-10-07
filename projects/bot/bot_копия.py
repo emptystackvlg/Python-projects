@@ -277,7 +277,7 @@ language.row ('Немецкий' , 'Итальянский' , 'Испански�
 @bot.message_handler(commands=['start'])
 
 def start_message(message):
-    s = open ('C:\Users\Alexandr\Desktop\Python\bot\hello.webp' , 'rb')
+    s = open ('hello.webp' , 'rb')
 
     bot.send_message(473909224,"Привет " + str(message.from_user.first_name) +  " !",reply_markup = mainkey)
     bot.send_sticker(message.chat.id , s)
