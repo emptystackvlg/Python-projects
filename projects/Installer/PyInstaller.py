@@ -13,8 +13,8 @@ except :
         system ("pip install PySide6")
         system ("cls")
         print ("Библиотеки установлены, перезапустите программу")
-        system ("cls")
         system ("pause")
+        exit (0)
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("PyInstaller")
