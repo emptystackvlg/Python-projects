@@ -96,7 +96,7 @@ def install_apps (lenght):
                 number = int (0)
                 path = diropenbox(title = 'Выберите папку')
                 chdir (path)
-                for number in range(lenght):
+                for number in range (lenght):
                         name = str(number) + ".exe"
                         subprocess.call(name, shell=True)
                         msg = "Вы хотите продолжить установку ?"
