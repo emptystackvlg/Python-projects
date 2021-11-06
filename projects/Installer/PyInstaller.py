@@ -18,7 +18,7 @@ except :
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("PyInstaller")
-        MainWindow.resize(323, 279)
+        MainWindow.resize(323, 279) 
         MainWindow.setMaximumSize (323, 279)
         MainWindow.setMinimumSize (323, 279) 
         self.centralwidget = QtWidgets.QWidget(MainWindow)
