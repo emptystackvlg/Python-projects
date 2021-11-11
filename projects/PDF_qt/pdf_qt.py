@@ -57,6 +57,8 @@ def word2pdf () :
     except:
         Dialog.show()
         word.Quit()
+
+    
     return 0 
 
 def image2pdf () :

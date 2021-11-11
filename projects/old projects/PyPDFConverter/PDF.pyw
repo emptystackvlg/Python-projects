@@ -1,6 +1,6 @@
-from PIL import Image
+#from PIL import Image
 import easygui as g
-import win32com.client
+#import win32com.client
 def image2pdf () :
     num = g.enterbox (title = "Количество изображений " , msg = "Введите количество изображений , которые хотите добавить ")
     n = int (num)
