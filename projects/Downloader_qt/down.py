@@ -6,7 +6,7 @@ import threading
 from PyQt6 import QtCore, QtGui, QtWidgets
 from win10toast_click import ToastNotifier as tf 
 
-from youtube_dl import YoutubeDL
+from yt_dlp import YoutubeDL
 from easygui import diropenbox
 from pyperclip import paste
 
