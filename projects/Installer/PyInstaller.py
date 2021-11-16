@@ -1,12 +1,6 @@
 from os import chdir , remove , system
 from urllib.request import urlretrieve as download
-try :
-        from easygui import diropenbox , ccbox
-        from win10toast import ToastNotifier as tf
-        import subprocess
-        from PyQt6 import QtCore, QtGui, QtWidgets
-        from easygui.boxes.choice_box import make_list_or_none
-except :
+def install_libs () :
         system ("pip install easygui")
         system ("pip install win10toast")
         system ("pip install PyQt6")
@@ -15,6 +9,15 @@ except :
         print ("Библиотеки установлены, перезапустите программу")
         system ("pause")
         exit (0)
+try :
+        from easygui import diropenbox , ccbox
+        from win10toast import ToastNotifier as tf
+        import subprocess
+        from PyQt6 import QtCore, QtGui, QtWidgets
+        from easygui.boxes.choice_box import make_list_or_none
+except :
+        install_libs ()
+        
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("PyInstaller")
@@ -64,12 +67,15 @@ class Ui_MainWindow(object):
 
 main_tuple = (  'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user' , 'https://sourceforge.net/projects/qbittorrent/files/qbittorrent-win32/qbittorrent-4.3.6/qbittorrent_4.3.6_x64_setup.exe/download',            
                 'https://download.scdn.co/SpotifySetup.exe','https://telegram.org/dl/desktop/win64','https://storage.googleapis.com/media.amperka.com/arduino-ide/arduino-latest-windows.exe',
-                'http://www.hibitsoft.ir/HiBitUninstaller/HiBitUninstaller-setup-2.6.15.exe',
+                'http://www.hibitsoft.ir/HiBitUninstaller/HiBitUninstaller-setup-2.6.15.exe','https://zoom.us/client/5.8.4.1736/ZoomInstaller.exe?archType=x64', 
                 'https://github.com/git-for-windows/git/releases/download/v2.32.0.windows.2/Git-2.32.0.2-64-bit.exe','https://central.github.com/deployments/desktop/desktop/latest/win32',
                 'https://javadl.oracle.com/webapps/download/AutoDL?BundleId=245029_d3c52aa6bfa54d3ca74e617f18309292','https://files3.codecguide.com/K-Lite_Codec_Pack_1635_Full.exe',
                 'https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.1.2/npp.8.1.2.Installer.exe','https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.0.1-Full-Installer-x64.exe',
-                'https://www.tracker-software.com/product/pdf-xchange-viewer/download?fileid=446','https://download.sublimetext.com/Sublime%20Text%20Build%203211%20x64%20Setup.exe',
-                'https://download.aida64.com/aida64extreme633.exe' , 'https://www.7-zip.org/a/7z1900-x64.exe' , 
+                'https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?platform=Default&source=EdgeStablePage&Channel=Stable&language=ru','https://download.sublimetext.com/Sublime%20Text%20Build%203211%20x64%20Setup.exe',
+                'https://www.7-zip.org/a/7z1900-x64.exe' , 'https://aka.ms/vs/17/release/vs_community.exe' , 'http://qttabbar.wdfiles.com/local--files/qttabbar1/QTTabBar_1043.zip' ,
+                'https://go.microsoft.com/fwlink/p/?LinkID=869426&clcid=0x419&culture=ru-ru&country=RU&lm=deeplink&lmsrc=groupChatMarketingPageWeb&cmpid=directDownloadWin64',
+                
+                
                 )
 
 def get_apps (links) : 
