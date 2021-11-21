@@ -74,6 +74,7 @@ main_tuple = (  'https://code.visualstudio.com/sha/download?build=stable&os=win3
                 'https://c2rsetup.officeapps.live.com/c2r/downloadEdge.aspx?platform=Default&source=EdgeStablePage&Channel=Stable&language=ru','https://download.sublimetext.com/Sublime%20Text%20Build%203211%20x64%20Setup.exe',
                 'https://www.7-zip.org/a/7z1900-x64.exe' , 'https://aka.ms/vs/17/release/vs_community.exe' , 'http://qttabbar.wdfiles.com/local--files/qttabbar1/QTTabBar_1043.zip' ,
                 'https://go.microsoft.com/fwlink/p/?LinkID=869426&clcid=0x419&culture=ru-ru&country=RU&lm=deeplink&lmsrc=groupChatMarketingPageWeb&cmpid=directDownloadWin64',
+                'https://sourceforge.net/projects/equalizerapo/files/latest/download',
                 
                 
                 )
@@ -89,8 +90,10 @@ def get_apps (links) :
         for i in range (len(links)) : 
                 name = str(count) + ".exe"
                 print ("Скачиваю файл номер " + str (count) + "\n")
+                tf().show_toast("PyInstaller", "Скачиваю файл номер " + str (count) + "\n" ,duration=5 , threaded=True)
                 download (links [i] , name)
                 count += 1
+                
         tf().show_toast("PyInstaller", "Скачивание завершено" ,duration=5 , threaded=True)
         MainWindow.show()
     except : 
