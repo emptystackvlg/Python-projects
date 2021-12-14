@@ -43,12 +43,8 @@ def word2pdf () :
         Dialog.hide()
         indirec = fileopenbox ("Выберите файл .docx")
         wdFormatPDF = 17
-
         word = Dispatch('Word.Application')
-      
-        
         doc = word.Documents.Open(indirec)
-        
         outdirec = filesavebox ("Выберите место для сохранения")
         doc.SaveAs(outdirec + ".pdf", FileFormat=wdFormatPDF)
         doc.Close()
@@ -57,8 +53,6 @@ def word2pdf () :
     except:
         Dialog.show()
         word.Quit()
-
-    
     return 0 
 
 def image2pdf () :
@@ -66,7 +60,6 @@ def image2pdf () :
         Dialog.hide()
         num = enterbox (title = "Количество изображений " , msg = "Введите количество изображений которые хотите добавить ")
         n = int (num)
-
         indir = fileopenbox ("Выберите изображение в формате JPEG или PNG")
         image1 = Image.open(str(indir))
         im1 = image1.convert ('RGB')
@@ -90,7 +83,7 @@ def launch (id) :
     if id == 0 : 
         image_thread = threading.Thread(target = image2pdf())
         image_thread.start
-        image_thread.join 
+        image_thread.join
     elif  id == 1 : 
         word_thread = threading.Thread (target = word2pdf()) 
         word_thread.start
