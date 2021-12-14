@@ -1,10 +1,13 @@
 import feedparser
 import telebot
+import os
+from telebot import apihelper
+import subprocess
+
 
 print("Бот работает")
 
-bot = telebot.TeleBot('')
-
+bot = telebot.TeleBot('1192738735:AAH86Ox6Gky82CjLNjoxNCpEzOw13ds2uY0')
 keyboard = telebot.types.ReplyKeyboardMarkup(True)
 keyboard.row ("ЧИТАТЬ НОВОСТИ")
 
@@ -44,5 +47,8 @@ def news (message ,l):
             entry = NewsFeed.entries[l]
             bot.send_message(message.chat.id, entry.link,reply_markup = switch)
 
-
-bot.polling(none_stop=True)
+try :
+    bot.polling(none_stop=True)
+except:
+    
+    os.system ('python rss.py')

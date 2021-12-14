@@ -11,7 +11,7 @@ print("Бот запущен")
 
 wikipedia.set_lang ('ru')
 
-owm = OWM('api key')
+owm = OWM('1192738735:AAH86Ox6Gky82CjLNjoxNCpEzOw13ds2uY0')
 
 #не забыть поменять API  ключ
 bot = telebot.TeleBot('api key ')
