@@ -1,15 +1,25 @@
 from __future__ import unicode_literals
-from logging import ERROR
-from os import startfile , chdir
-
-import threading 
-from PyQt6 import QtCore, QtGui, QtWidgets
-from win10toast_click import ToastNotifier as tf 
-
-from yt_dlp import YoutubeDL
-from easygui import diropenbox
-from pyperclip import paste
-
+from os import startfile , chdir, system
+def install_libs () :
+        system ("pip install easygui")
+        system ("pip install win10toast")
+        system ("pip install PyQt6")
+        system ("pip install PySide6")
+        system ("pip install pyperclip")
+        system ("pip install yt_dlp")
+        system ("cls")
+        print ("Библиотеки установлены, перезапустите программу")
+        system ("pause")
+        exit (0)
+try :
+    import threading 
+    from PyQt6 import QtCore, QtGui, QtWidgets
+    from win10toast_click import ToastNotifier as tf 
+    from yt_dlp import YoutubeDL
+    from easygui import diropenbox
+    from pyperclip import paste
+except: 
+    install_libs ()
 
 
 class Ui_Dialog(object):

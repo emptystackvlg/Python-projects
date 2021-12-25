@@ -41,10 +41,11 @@ class Ui_Dialog(object):
 def word2pdf () :
     try :
         Dialog.hide()
-        indirec = fileopenbox ("Выберите файл .docx")
-        wdFormatPDF = 17
-        word = Dispatch('Word.Application')
-        doc = word.Documents.Open(indirec)
+        indirec = fileopenbox ("Выберите файл .doc или .docx" , multiple= True)
+        for i in range (0,len (indirec) - 1):
+            wdFormatPDF = 17
+            word = Dispatch('Word.Application')
+            doc = word.Documents.Open(indirec[i])
         outdirec = filesavebox ("Выберите место для сохранения")
         doc.SaveAs(outdirec + ".pdf", FileFormat=wdFormatPDF)
         doc.Close()

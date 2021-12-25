@@ -1,11 +1,25 @@
-from easygui import enterbox , fileopenbox , filesavebox
-from easygui.boxes.derived_boxes import convert_to_type
-from win32com.client import Dispatch
-from PIL import Image
-import threading 
-from PyQt6 import QtCore, QtGui, QtWidgets
+from os import chdir , remove , system
+def install_libs () :
+        system ("pip install easygui")
+        system ("pip install win10toast")
+        system ("pip install PyQt6")
+        system ("pip install PySide6")
+        system ("pip install pywin32")
+        system ("cls")
+        print ("Библиотеки установлены, перезапустите программу")
+        system ("pause")
+        exit (0)
+try :
+    from easygui import enterbox , fileopenbox , filesavebox
+    from win32com.client import Dispatch
+    from PIL import Image
+    import threading 
+    from win10toast import ToastNotifier as tf 
+    from PyQt6 import QtCore, QtGui, QtWidgets 
+except :
+        install_libs ()
 
-
+        
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -50,6 +64,7 @@ def word2pdf () :
         doc.SaveAs(outdirec + ".pdf", FileFormat=wdFormatPDF)
         doc.Close()
         word.Quit()
+        tf().show_toast("PDFConverter","Ваш PDF файл готов", duration= 10 , threaded= True)
         Dialog.show()
     except:
         Dialog.show()
@@ -70,6 +85,7 @@ def image2pdf () :
             imagelist.append(converted_image)
         todir = filesavebox("Выберите место для сохранения")
         first_convert.save(str(todir) + ".pdf" , save_all= True , append_images=imagelist)
+        tf().show_toast("PDFConverter","Ваш PDF файл готов", duration= 10 , threaded= True)
         Dialog.show()
     except:
         Dialog.show()
