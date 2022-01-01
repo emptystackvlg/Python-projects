@@ -65,6 +65,7 @@ def word2pdf () :
         doc.Close()
         word.Quit()
         tf().show_toast("PDFConverter","Ваш PDF файл готов", duration= 10 , threaded= True)
+        system (str(outdirec) + ".pdf")
         Dialog.show()
     except:
         Dialog.show()
@@ -86,6 +87,7 @@ def image2pdf () :
         todir = filesavebox("Выберите место для сохранения")
         first_convert.save(str(todir) + ".pdf" , save_all= True , append_images=imagelist)
         tf().show_toast("PDFConverter","Ваш PDF файл готов", duration= 10 , threaded= True)
+        system (str(todir) + ".pdf")
         Dialog.show()
     except:
         Dialog.show()
