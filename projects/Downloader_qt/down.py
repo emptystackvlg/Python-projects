@@ -76,7 +76,6 @@ if __name__ == "__main__":
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
     main_thread = threading.Thread (target= Dialog.show())
- 
     sys.exit(app.exec())
 
 
