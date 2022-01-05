@@ -60,13 +60,15 @@ def down():
         def open () :
             startfile(save)
         with YoutubeDL(ydl_opts) as ydl:
-            tf().show_toast("PyDownloader","Скачивание началось",duration=10,threaded=True)
+            tf().show_toast("PyDownloader","Скачивание началось",duration=5,threaded=True)
             chdir(save)
             ydl.download([str(link)])
             
             tf().show_toast("PyDownloader","Ваш файл скачался , нажмите чтобы открыть",duration=10,threaded=True, 
             callback_on_click=open)
+            Dialog.show()
     except:
+        tf().show_toast("PyDownloader","Что-то пошло не так,попробуйте еще раз",duration=10,threaded=True,callback_on_click= None)
         Dialog.show()
 if __name__ == "__main__":
     import sys
