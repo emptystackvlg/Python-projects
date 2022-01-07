@@ -46,8 +46,6 @@ class Ui_MainWindow(object):
         self.DistroBox.addItem("")
         self.DistroBox.addItem("")
         self.DistroBox.addItem("")
-        self.DistroBox.addItem("")
-        self.DistroBox.addItem("")
         self.DownloadButton = QtWidgets.QPushButton(self.centralwidget)
         self.DownloadButton.setGeometry(QtCore.QRect(60, 200, 231, 41))
         font = QtGui.QFont()
@@ -95,8 +93,6 @@ class Ui_MainWindow(object):
         self.DistroBox.setItemText(15, _translate("MainWindow", "Deepin Linux"))
         self.DistroBox.setItemText(16, _translate("MainWindow", "Zorin OS"))
         self.DistroBox.setItemText(17, _translate("MainWindow", "Pop!_OS"))
-        self.DistroBox.setItemText(18, _translate("MainWindow", "Clear Linux"))
-        self.DistroBox.setItemText(19, _translate("MainWindow", "Garuda Linux"))
         self.DownloadButton.setText(_translate("MainWindow", "Скачать"))
         self.DownloadButton.clicked.connect (lambda : download (self.DistroBox.currentIndex()))
         self.label.setText(_translate("MainWindow", "DistroDowloader"))
@@ -173,6 +169,50 @@ def download (id):
             tf().show_toast("Linux Downloader" , "Скачивание Ubuntu началось" , duration = 10 , threaded = True)
             save ("https://releases.ubuntu.com/20.04.3/ubuntu-20.04.3-desktop-amd64.iso","Ubuntu.iso")
             tf().show_toast("Linux Downloader" , "Скачивание Ubuntu закончилось" , duration = 10 , threaded = True)
+        elif id == 11 : 
+            dir = diropenbox ("Выберите место для сохранения")
+            chdir (dir)
+            tf().show_toast("Linux Downloader" , "Скачивание Kubuntu началоcь" , duration = 10 , threaded = True)
+            save ("https://cdimage.ubuntu.com/kubuntu/releases/21.10/release/kubuntu-21.10-desktop-amd64.iso","Kubuntu.iso")
+            tf().show_toast("Linux Downloader" , "Скачивание Kubuntu закончилось" , duration = 10 , threaded = True)
+    
+        elif id == 12 : 
+            dir = diropenbox ("Выберите место для сохранения")
+            chdir (dir)
+            tf().show_toast("Linux Downloader" , "Скачивание Lubuntu началоcь" , duration = 10 , threaded = True)
+            save ("https://cdimage.ubuntu.com/lubuntu/releases/21.10/release/lubuntu-21.10-desktop-amd64.iso","Lubuntu.iso")
+            tf().show_toast("Linux Downloader" , "Скачивание Lubuntu закончилось" , duration = 10 , threaded = True)
+        elif id == 13 : 
+            dir = diropenbox ("Выберите место для сохранения")
+            chdir (dir)
+            tf().show_toast("Linux Downloader" , "Скачивание Xubuntu началоcь" , duration = 10 , threaded = True)
+            save ("https://mirror.yandex.ru/ubuntu-cdimage/xubuntu/releases/20.04/release/xubuntu-20.04.3-desktop-amd64.iso","Xubuntu.iso")
+            tf().show_toast("Linux Downloader" , "Скачивание Xubuntu закончилось" , duration = 10 , threaded = True)
+        elif id == 14 : 
+            dir = diropenbox ("Выберите место для сохранения")
+            chdir (dir)
+            tf().show_toast("Linux Downloader" , "Скачивание Fedora началоcь" , duration = 10 , threaded = True)
+            save ("https://download.fedoraproject.org/pub/fedora/linux/releases/35/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-35-1.2.iso","Fedora.iso")
+            tf().show_toast("Linux Downloader" , "Скачивание Fedora закончилось" , duration = 10 , threaded = True)
+        elif id == 15 : 
+            dir = diropenbox ("Выберите место для сохранения")
+            chdir (dir)
+            tf().show_toast("Linux Downloader" , "Скачивание Deepin Linux началоcь" , duration = 10 , threaded = True)
+            save ("https://sourceforge.net/projects/deepin/files/20.2.2/deepin-desktop-community-20.2.2-amd64.iso","Deepin Linux.iso")
+            tf().show_toast("Linux Downloader" , "Скачивание Deepin Linux закончилось" , duration = 10 , threaded = True)
+        elif id == 16 : 
+            dir = diropenbox ("Выберите место для сохранения")
+            chdir (dir)
+            tf().show_toast("Linux Downloader" , "Скачивание Zorin OS началоcь" , duration = 10 , threaded = True)
+            save ("https://mirrors.edge.kernel.org/zorinos-isos/16/Zorin-OS-16-Core-64-bit-r4.iso","Zorin OS.iso")
+            tf().show_toast("Linux Downloader" , "Скачивание Zorin OS закончилось" , duration = 10 , threaded = True)
+        elif id == 17 :
+            dir = diropenbox ("Выберите место для сохранения")
+            chdir (dir)
+            tf().show_toast("Linux Downloader" , "Скачивание Pop!_OS началоcь" , duration = 10 , threaded = True)
+            save ("https://pop-iso.sfo2.cdn.digitaloceanspaces.com/21.10/amd64/intel/3/pop-os_21.10_amd64_intel_3.iso","Pop!_OS.iso")
+            tf().show_toast("Linux Downloader" , "Скачивание Pop!_OS закончилось" , duration = 10 , threaded = True)
+
     except: 
         
         tf().show_toast("Linux Downloader" , "Что-то пошло не так , попробуйте еще раз", duration = 10, threaded = True)
