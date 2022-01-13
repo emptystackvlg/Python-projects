@@ -4,7 +4,6 @@ from win10toast_click import ToastNotifier as tf
 from easygui import diropenbox
 from os import chdir
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
