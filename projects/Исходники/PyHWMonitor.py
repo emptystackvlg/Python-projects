@@ -4,7 +4,7 @@ import psutil
 import easygui as g
 computer = wmi.WMI()
 os_info = computer.Win32_OperatingSystem()[0]
-system_ram = int(os_info.TotalVisibleMemorySize) / 1048576  
+system_ram = round (float(os_info.TotalVisibleMemorySize) / 1048576,1)
 gpu_info = computer.Win32_VideoController()[0]
 proc_info = computer.Win32_Processor()[0]
 proc_freq = float(computer.Win32_Processor()[0].MaxClockSpeed) /1000 
