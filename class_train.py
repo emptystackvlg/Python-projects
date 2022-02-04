@@ -3,7 +3,6 @@ import time
 
 os.system("cls")
 
-
 class Hot_Dog ():
     def __init__(self, meat, addons, souse):
 
