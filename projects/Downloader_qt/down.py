@@ -11,6 +11,7 @@ def install_libs () :
         print ("Библиотеки установлены, перезапустите программу")
         system ("pause")
         exit (0)
+        
 try :
     import threading 
     from PyQt6 import QtCore, QtGui, QtWidgets
