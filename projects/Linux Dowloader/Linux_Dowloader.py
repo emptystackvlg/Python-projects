@@ -1,9 +1,17 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
-from urllib.request import urlretrieve as save 
-from win10toast_click import ToastNotifier as tf 
-from easygui import diropenbox
-from os import chdir
-
+def install_libs () : 
+    from os import system
+    system ("pip installl easygui")
+    system ("pip install win10toast_click")
+    system ("pip install PyQt6")
+    system ("pip install PySide6")
+try :
+    from PyQt6 import QtCore, QtGui, QtWidgets
+    from urllib.request import urlretrieve as save 
+    from win10toast_click import ToastNotifier as tf 
+    from easygui import diropenbox
+    from os import chdir
+except : 
+    install_libs ()
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
