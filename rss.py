@@ -30,7 +30,7 @@ def main(message):
     i =int (0)
     if message.text.lower() == "читать новости":
         bot.send_message(message.chat.id, "Выберите новостной источник", reply_markup = source)
-      
+    
     elif message.text.lower () == "4pda" : 
         news (i)
     elif message.text.lower() == "далее------>>>" :
