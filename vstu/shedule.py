@@ -1,9 +1,10 @@
 from urllib.request import urlretrieve as download 
 import xlrd
-from os import remove
+from os import chdir , remove
 from colorama import Fore
-try:
-    remove ("C:/Users/Alexandr/Documents/GitHub/Python-projects/vstu.xls") #если есть файл,то он удаляется
+chdir ("C:/Users/Alexandr/Documents/GitHub/Python-projects/vstu")
+try : 
+    remove ("C:/Users/Alexandr/Documents/GitHub/Python-projects/vstu/vstu.xls")
 except:
     pass
 download ("https://www.vstu.ru/upload/raspisanie/z/%D0%9E%D0%9D_%D0%A4%D0%AD%D0%92%D0%A2_1%20%D0%BA%D1%83%D1%80%D1%81.xls","vstu.xls")
