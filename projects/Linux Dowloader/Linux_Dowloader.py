@@ -106,6 +106,14 @@ class Ui_MainWindow(object):
 
 
 
+def cbk(a,b,c):
+    per=100.0*a*b/c
+    if per>100:
+        per=100
+    print ('%.2f%%' % per)
+
+
+
 def download (id):
     
     try : 

@@ -106,7 +106,16 @@ class Ui_MainWindow(object):
         self.DownloadButton.setText(_translate("MainWindow", "Скачать"))
         self.DownloadButton.clicked.connect (lambda : download (self.DistroBox.currentIndex()))
         self.label.setText(_translate("MainWindow", "DistroDowloader"))
-        
+
+
+
+def cbk(a,b,c):
+    per=100.0*a*b/c
+    if per>100:
+        per=100
+    print (int (per))
+
+
 def download (id):
     names = ("Linux Mint (Cinamon)" ,"Linux Mint (Mate)","Linux Mint (Xfce)" , "MX Linux (KDE)" , "MX Linux (Xfce)" ,
             "MX Linux (Fluxbox)","Manjaro (KDE)","Manjaro (Xfce)","Manjaro (GNOME)","KDE Neon","Ubuntu","Kubuntu","Lubuntu",
@@ -125,7 +134,7 @@ def download (id):
         dir = diropenbox ("Выберите место для сохранения")   
         chdir (dir)
         tf().show_toast("Linux Downloader" , "Скачивание " + names[id]+ " началось", duration = 10, threaded = True)
-        save (links[id], names[id]+".iso")      
+        save (links[id], names[id]+".iso",cbk)      
         tf().show_toast ("Linux Downloader" , "Скачивание " + names[id] + " завершено", duration = 10, threaded = True)
     except: 
         tf().show_toast("Linux Downloader" , "Что-то пошло не так , попробуйте еще раз", duration = 10, threaded = True)
