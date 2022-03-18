@@ -1,5 +1,7 @@
+from tkinter import font
 from urllib.request import urlretrieve as download 
 import xlrd
+from pyfiglet import Figlet
 from os import chdir , remove
 from colorama import Fore
 chdir ("C:/Users/Alexandr/Documents/GitHub/Python-projects/vstu")
@@ -36,7 +38,8 @@ def classrooms () :
         elif str(item_2) != "" and str(item_2) != "лаб." and str(item_2) != "пр.":
             print (Fore.GREEN +"Аудитория " + Fore.WHITE + str (item_2))
 
-
+text = Figlet (font = 'slant')
+print (text.renderText("VSTU SHEDULE"))
 subjects()
 techers()
-classrooms ()
+classrooms()
