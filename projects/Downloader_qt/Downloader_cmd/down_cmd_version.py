@@ -5,7 +5,7 @@ from win10toast import ToastNotifier as tf
 from yt_dlp import YoutubeDL
 from pyfiglet import Figlet
 import easygui as gui
-
+system ("cls")
 
 def youtube_downloader () :
     text = Figlet (font = 'slant')
@@ -23,7 +23,6 @@ def youtube_downloader () :
             ydl.download([str(link)])
         print ("Загрузка завершена !")
         system ("pause")
-        exit ()
     except:
         print ("Ошибка,попробуйте еще раз")
         system ("pause")
