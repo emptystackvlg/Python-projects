@@ -7,7 +7,7 @@ import subprocess
 
 print("Бот работает")
 
-bot = telebot.TeleBot('1192738735:AAH86Ox6Gky82CjLNjoxNCpEzOw13ds2uY0')
+bot = telebot.TeleBot('')
 keyboard = telebot.types.ReplyKeyboardMarkup(True)
 keyboard.row ("ЧИТАТЬ НОВОСТИ")
 
