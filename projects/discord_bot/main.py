@@ -18,4 +18,4 @@ async def on_message(message):
     if message.content.lower() == "info":
         await message.channel.send ("Это тестовый Discord бот")
 
-client.run('token')
+client.run('token' )
