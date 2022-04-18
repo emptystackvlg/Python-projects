@@ -8,6 +8,7 @@ import easygui as gui
 system ("cls")
 
 def youtube_downloader () :
+    system ("cls")
     text = Figlet (font = 'slant')
     print (text.renderText("Py_Downloader"))
     link = str ()
