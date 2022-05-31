@@ -1,5 +1,5 @@
 from os import chdir , remove , system
-def install_libs () :
+def install_libs ()  :
         system ("pip install easygui")
         system ("pip install win10toast")
         system ("pip install PyQt6")
