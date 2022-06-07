@@ -1,9 +1,10 @@
-x = int (5)
-y = int (5)
-
-def summ (a = int (),b = int ()):
-    c = int (0)
-    c = a +b 
-    return c
-r = int (summ(x,y))
-print (r)
+from re import T
+import requests
+from bs4 import BeautifulSoup as bs
+import pandas as pd
+URL = "https://eos2.vstu.ru/grade/report/overview/index.php"
+r = requests.get (URL)
+soup = bs (r.text,"html.parser")
+titles = soup.find_all("td",class_ = "cell c0")
+for name in titles:
+    print(name.a)
