@@ -3,7 +3,7 @@ from tkinter.font import names
 
 def install_libs () : 
     from os import system
-    system ("pip installl easygui")
+    system ("pip install easygui")
     system ("pip install win10toast_click")
     system ("pip install PyQt6")
     system ("pip install PySide6")
@@ -109,11 +109,11 @@ class Ui_MainWindow(object):
 
 
 
-def cbk(a,b,c):
-    per=100.0*a*b/c
-    if per>100:
-        per=100
-    print (int (per))
+#def cbk(a,b,c):
+    #per=100.0*a*b/c
+    #if per>100:
+    #    per=100
+   # print (int (per))
 
 
 def download (id):
@@ -134,14 +134,14 @@ def download (id):
         dir = diropenbox ("Выберите место для сохранения")   
         chdir (dir)
         tf().show_toast("Linux Downloader" , "Скачивание " + names[id]+ " началось", duration = 10, threaded = True)
-        save (links[id], names[id]+".iso",cbk)      
+        save (links[id], names[id]+".iso")#,cbk)      
         tf().show_toast ("Linux Downloader" , "Скачивание " + names[id] + " завершено", duration = 10, threaded = True)
     except: 
         tf().show_toast("Linux Downloader" , "Что-то пошло не так , попробуйте еще раз", duration = 10, threaded = True)
         MainWindow.show ()
         print ("Error")
     MainWindow.show ()
-
+    
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
