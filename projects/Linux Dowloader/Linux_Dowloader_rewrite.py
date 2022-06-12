@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         self.DistroBox.setItemText(17, _translate("MainWindow", "Pop!_OS"))
         self.DownloadButton.setText(_translate("MainWindow", "Скачать"))
         self.DownloadButton.clicked.connect (lambda : download (self.DistroBox.currentIndex()))
-        self.label.setText(_translate("MainWindow", "DistroDowloader"))
+        self.label.setText(_translate("MainWindow", "LinuxDowloader"))
 
 
 
