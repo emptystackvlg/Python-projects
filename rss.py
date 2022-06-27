@@ -7,12 +7,12 @@ import subprocess
 
 print("Бот работает")
 
-bot = telebot.TeleBot('')
+bot = telebot.TeleBot('1217728629:AAF8E1uYby_LUyFTegPCTcTmsVjklwHJcWs')
 keyboard = telebot.types.ReplyKeyboardMarkup(True)
 keyboard.row ("ЧИТАТЬ НОВОСТИ")
 
 source = telebot.types.ReplyKeyboardMarkup(True)
-source.row ("4PDA","Meduza") 
+source.row ("БЛОКНОТ") 
 
 
 
@@ -31,8 +31,8 @@ def main(message):
     if message.text.lower() == "читать новости":
         bot.send_message(message.chat.id, "Выберите новостной источник", reply_markup = source)
     
-    elif message.text.lower () == "4pda" : 
-        news (i)
+    elif message.text.lower () == "блокнот" : 
+        news (message,i)
     elif message.text.lower() == "далее------>>>" :
         i += 1
         news(message ,i)
@@ -47,8 +47,6 @@ def news (message ,l):
             entry = NewsFeed.entries[l]
             bot.send_message(message.chat.id, entry.link,reply_markup = switch)
 
-try :
-    bot.polling(none_stop=True)
-except:
-    
-    os.system ('python rss.py')
+
+bot.polling(none_stop=True)
+

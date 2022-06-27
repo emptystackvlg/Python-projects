@@ -46,7 +46,7 @@ def send_text(message):
         bot.send_message (message.chat.id , "Ладно , что на этот раз ?")
         bot.register_next_step_handler (message , save_text )
 
-print()
+
 
     elif message.text.lower () == "исходный код" :
 
