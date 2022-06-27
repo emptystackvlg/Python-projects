@@ -129,7 +129,7 @@ def download (id):
             "https://cdimage.ubuntu.com/lubuntu/releases/21.10/release/lubuntu-21.10-desktop-amd64.iso","https://mirror.yandex.ru/ubuntu-cdimage/xubuntu/releases/20.04/release/xubuntu-20.04.3-desktop-amd64.iso",
             "https://download.fedoraproject.org/pub/fedora/linux/releases/35/Workstation/x86_64/iso/Fedora-Workstation-Live-x86_64-35-1.2.iso","https://sourceforge.net/projects/deepin/files/20.2.2/deepin-desktop-community-20.2.2-amd64.iso",
             "https://mirrors.edge.kernel.org/zorinos-isos/16/Zorin-OS-16-Core-64-bit-r4.iso","https://pop-iso.sfo2.cdn.digitaloceanspaces.com/21.10/amd64/intel/3/pop-os_21.10_amd64_intel_3.iso")
-    try : 
+    try: 
         MainWindow.hide () 
         dir = diropenbox ("Выберите место для сохранения")   
         chdir (dir)
