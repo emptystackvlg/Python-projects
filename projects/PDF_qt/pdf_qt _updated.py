@@ -5,6 +5,7 @@ def install_libs ()  :
         system ("pip install PyQt6")
         system ("pip install PySide6")
         system ("pip install pywin32")
+        system ("pip install Pillow")
         system ("cls")
         print ("Библиотеки установлены, перезапустите программу")
         system ("pause")
