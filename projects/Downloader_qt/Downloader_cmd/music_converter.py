@@ -1,7 +1,9 @@
 import  os
 from easygui import diropenbox
 from moviepy.editor import * 
-
+from pyfiglet import Figlet
+text = Figlet (font = 'slant')
+print (text.renderText("Py_Converter"))
 directory = diropenbox ("Выбериите папку с видео")
 files = os.listdir(directory) 
 print('\n'.join(files)) 
