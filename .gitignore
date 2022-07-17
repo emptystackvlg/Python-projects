@@ -104,3 +104,4 @@ venv.bak/
 .mypy_cache/
 .vscode/settings.json
 vk_config.v2.json
+file.mp3
