@@ -1,4 +1,4 @@
-import  os
+from os import system
 from easygui import diropenbox
 from moviepy.editor import * 
 from pyfiglet import Figlet
@@ -17,6 +17,4 @@ perm_for_del = str (input ("Удалить видео ? (Y/N)\n> "))
 if perm_for_del == "Y":
     for file in files : 
         os.remove(directory + "\\" + file)
-
-else:
-    exit (0)
+system ("pause")
