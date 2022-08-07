@@ -7,7 +7,6 @@ print (text.renderText("Py_Converter"))
 directory = diropenbox ("Выбериите папку с видео")
 files = os.listdir(directory) 
 print('\n'.join(files)) 
-print (type (files))
 dir_to_save = diropenbox ("Выберите папку для сохранения музыки")
 for file in files: 
     audioclip = AudioFileClip(directory+"\\"+file) 
