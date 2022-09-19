@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from os import startfile , chdir, system
+from os import chdir, system
 import sys
 from win10toast import ToastNotifier as tf 
 from yt_dlp import YoutubeDL
