@@ -109,12 +109,6 @@ class Ui_MainWindow(object):
 
 
 
-#def cbk(a,b,c):
-    #per=100.0*a*b/c
-    #if per>100:
-    #    per=100
-   # print (int (per))
-
 
 def download (id):
     names = ("Linux Mint (Cinamon)" ,"Linux Mint (Mate)","Linux Mint (Xfce)" , "MX Linux (KDE)" , "MX Linux (Xfce)" ,
@@ -145,7 +139,7 @@ def download (id):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    #app.setStyle("")
+    app.setStyle("Fusion")
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
