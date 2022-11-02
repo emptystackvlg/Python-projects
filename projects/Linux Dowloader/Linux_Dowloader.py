@@ -1,6 +1,6 @@
 def install_libs () : 
     from os import system
-    system ("pip installl easygui")
+    system ("pip install easygui")
     system ("pip install win10toast_click")
     system ("pip install PyQt6")
     system ("pip install PySide6")
