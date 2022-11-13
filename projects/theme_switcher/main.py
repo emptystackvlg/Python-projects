@@ -16,5 +16,5 @@ while True :
     print (hour)
     if hour >= 19:
         dark()
-        sleep (28800)
+        exit(0)
     sleep (60)
