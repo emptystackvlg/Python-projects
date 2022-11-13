@@ -9,11 +9,11 @@ def dark ():
     command = '"C:\\Users\\Alexandr\\AppData\\Local\\Microsoft\\Windows\\Themes\\dark.theme & timeout /t 0 & taskkill /im "systemsettings.exe" /f"'
     system (command)
     return 0
-
-white()
+hour = time.now().hour
+if hour < 19:
+    white()
 while True :
     hour = time.now().hour
-    print (hour)
     if hour >= 19:
         dark()
         exit(0)
