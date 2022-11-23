@@ -81,7 +81,7 @@ def image2pdf () :
         imagelist = []
         first_image =Image.open(str(indir [0]))
         first_convert = first_image.convert("RGB")
-        for i in range (1,len (indir) -1):
+        for i in range (1,len (indir)):
             image = Image.open(str(indir[i]))
             converted_image = image.convert ('RGB')
             imagelist.append(converted_image)
