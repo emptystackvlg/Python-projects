@@ -10,7 +10,7 @@ def install_libs ()  :
         print ("Библиотеки установлены, перезапустите программу")
         system ("pause")
         exit (0)
-try :
+try : 
     from easygui import enterbox , fileopenbox , filesavebox
     from win32com.client import Dispatch
     from PIL import Image
