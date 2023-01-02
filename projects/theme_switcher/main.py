@@ -10,11 +10,11 @@ def dark ():
     system (command)
     return 0
 hour = time.now().hour
-if hour < 19:
+if hour < 19 or hour > 5:
     white()
 while True :
     hour = time.now().hour
-    if hour >= 19:
+    if hour >= 19 or hour <5:
         dark()
         exit(0)
     sleep (60)
