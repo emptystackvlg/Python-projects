@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("PyInstaller")
         MainWindow.resize(323, 279) 
         MainWindow.setMaximumSize (323, 279)
-        MainWindow.setMinimumSize (323, 279) 
+        MainWindow.setMinimumSize (323, 279)    
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.Download = QtWidgets.QPushButton(self.centralwidget)
