@@ -1,10 +1,9 @@
 from __future__ import unicode_literals
 from os import chdir, system
-import sys
 from win10toast import ToastNotifier as tf 
-from youtube_dl import YoutubeDL
+from yt_dlp import YoutubeDL
 from pyfiglet import Figlet
-import easygui as gui
+from easygui import diropenbox
 system ("cls")
 
 def youtube_downloader () :
@@ -16,7 +15,7 @@ def youtube_downloader () :
     if link == '':
         system ("cls")
         youtube_downloader()
-    save = gui.diropenbox(title="Выберите папку для сохранения")
+    save = diropenbox(title="Выберите папку для сохранения")
     try:
         ydl_opts = {}
         with YoutubeDL(ydl_opts) as ydl:
@@ -24,12 +23,14 @@ def youtube_downloader () :
             ydl.download([str(link)])
         print ("Загрузка завершена !")
         system ("pause")
+        youtube_downloader()        
     except:
         print ("Ошибка,попробуйте еще раз")
         system ("pause")
         system ("cls")
         youtube_downloader()        
-        
+
+
 youtube_downloader()
 
 

@@ -14,67 +14,67 @@ wikipedia.set_lang ('ru')
 owm = OWM('1192738735:AAH86Ox6Gky82CjLNjoxNCpEzOw13ds2uY0')
 
 #не забыть поменять API  ключ
-bot = telebot.TeleBot('api key ')
+bot = telebot.TeleBot('1192738735:AAHMlpwVB1ZhJC9VGcwqqkhNzrl0Wy7qXO0')
 
 
 link1 = telebot.types.InlineKeyboardMarkup()
-url1 = (telebot.types.InlineKeyboardButton(text = "Перейти на сайт", url = "https://soskavlg.github.io/"))
+url1 = (telebot.types.InlineKeyboardButton(text = "Перейти на сайт", url = "https://emptystackvlg.github.io/"))
 link1.add (url1)
 
 link3 = telebot.types.InlineKeyboardMarkup()
-url3 = (telebot.types.InlineKeyboardButton (text = "Перейти на  GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/bot.py") )
+url3 = (telebot.types.InlineKeyboardButton (text = "Перейти на  GitHub" , url = "https://github.com/emptystackvlg/Python-projects/blob/master/bot.py") )
 link3.add (url3)
 
 
 
 link4 = telebot.types.InlineKeyboardMarkup()
-url4 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" ,  url = "https://github.com/SoskaVLG/Python-projects/blob/master/PySpeedtest.py"))
+url4 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" ,  url = "https://github.com/emptystackvlg/Python-projects/blob/master/PySpeedtest.py"))
 link4.add (url4)
 
 
 link5 = telebot.types.InlineKeyboardMarkup()
-url5 = (telebot.types.InlineKeyboardButton(text = "Исходный код на  GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/PyDownloader.py"))
+url5 = (telebot.types.InlineKeyboardButton(text = "Исходный код на  GitHub" , url = "https://github.com/emptystackvlg/Python-projects/blob/master/PyDownloader.py"))
 link5.add (url5)
 
 
 link6 = telebot.types.InlineKeyboardMarkup()
-url6 = (telebot.types.InlineKeyboardButton(text = "Исходный код на  GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/PyGeometryCalc.py"))
+url6 = (telebot.types.InlineKeyboardButton(text = "Исходный код на  GitHub" , url = "https://github.com/emptystackvlg/Python-projects/blob/master/PyGeometryCalc.py"))
 link6.add (url6)
 
 
 
 link7 = telebot.types.InlineKeyboardMarkup()
-url7 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/PyHWMonitor.py"))
+url7 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" , url = "https://github.com/emptystackvlg/Python-projects/blob/master/PyHWMonitor.py"))
 link7.add (url7)
 
 
 
 link8 = telebot.types.InlineKeyboardMarkup()
-url8 = (telebot.types.InlineKeyboardButton (text = "Исходный код на GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/PyTranslate.py"))
+url8 = (telebot.types.InlineKeyboardButton (text = "Исходный код на GitHub" , url = "https://github.com/emptystackvlg/Python-projects/blob/master/PyTranslate.py"))
 link8.add (url8)
 
 
 
 link9 = telebot.types.InlineKeyboardMarkup()
-url9 = (telebot.types.InlineKeyboardButton (text = "Исходный код на GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/PyWikiSearch.py"))
+url9 = (telebot.types.InlineKeyboardButton (text = "Исходный код на GitHub" , url = "https://github.com/emptystackvlg/Python-projects/blob/master/PyWikiSearch.py"))
 link9.add(url9)
 
 
 
 link10 = telebot.types.InlineKeyboardMarkup()
-url10 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/PyReminder.py"))
+url10 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" , url = "https://github.com/emptystackvlg/Python-projects/blob/master/PyReminder.py"))
 link10.add(url10)
 
 
 
 link11 = telebot.types.InlineKeyboardMarkup()
-url11 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" , url = "https://github.com/SoskaVLG/Python-projects/blob/master/PyQRMaker.py"))
+url11 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" , url = "https://github.com/emptystackvlg/Python-projects/blob/master/PyQRMaker.py"))
 link11.add(url11)
 
 
 
 link12 = telebot.types.InlineKeyboardMarkup()
-url12 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" , url = "https://github.com/SoskaVLG/CPP-projects/blob/master/Child_Train.cpp"))
+url12 = (telebot.types.InlineKeyboardButton(text = "Исходный код на GitHub" , url = "https://github.com/emptystackvlg/CPP-projects/blob/master/Child_Train.cpp"))
 link12.add(url12)
 
 
@@ -554,8 +554,8 @@ def send_text(message):
 
 
     elif message.text.lower() == "путин pack" :
-       st3 = open ('putins_webp.zip' , 'rb')
-       bot.send_document(message.chat.id , st3)
+        st3 = open ('putins_webp.zip' , 'rb')
+        bot.send_document(message.chat.id , st3)
 
 
     elif message.text.lower() == "fuck rkn pack" :
@@ -854,7 +854,6 @@ def wiki(message) :
         bot.send_document(message.chat.id , sad , reply_markup = keyboard1 )
     except(DisambiguationError):
         bot.send_message(message.chat.id ,"Ваш запрос имеет множество значений , пожалуйста укажите точнее , то что хотите найти")
-     
 
 
 
