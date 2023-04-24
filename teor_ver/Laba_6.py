@@ -12,7 +12,7 @@ def main ():
             for i in range (len(mass)):
                 print ("i = " + str(i))
                 for j in mass[i] :
-                    print (j)
+                    print (j,sep=" ")
     except FileNotFoundError:
         print ("Файл не найден")
         system("pause")
