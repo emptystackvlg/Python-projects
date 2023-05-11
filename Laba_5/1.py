@@ -73,8 +73,7 @@ def params (mass,freq):
     Sigma_v = sqrt(D_v)
     return (X_v,D_v,Sigma_v)
 
-def make_plots (mass_x,mass_y):
-    plt.rcdefaults()
+def make_plot_of_freq (mass_x,mass_y):
     plt.grid()
     plt.xlim (0,max(mass_x)+1)
     plt.ylim (0,max (mass_y)+1)
@@ -84,11 +83,27 @@ def make_plots (mass_x,mass_y):
     for i in range (len(mass_x)):
             x = mass_x[i]
             y = mass_y[i]
-            string = ("(" + str(x) + "," + str(y) + ")")
-            plt.text(x-0.3,y+0.3,string)
+            string = ("(" + str(x) + " ; " + str(y) + ")")
+            plt.text(x-0.4,y+0.4,string)
     plt.plot (mass_x,mass_y, '-rx',markersize = 9)
-    plt.show()
-    
+    plt.show()  
+
+def make_plot_of_rel_freq (mass_x,mass_y):
+    plt.grid()
+    plt.xlim (0,max(mass_x)+1)
+    plt.ylim (0,1)
+    plt.xlabel (r'$xi$')
+    plt.ylabel(r'$ni$')
+    plt.title ("Полигон относительных частот")
+    for i in range (len(mass_x)):
+            x = mass_x[i]
+            y = mass_y[i]
+            x = float("{0:.4f}".format(x))
+            y = float("{0:.4f}".format(y))
+            string = ("(" + str(x) + " ; " + str(y) + ")")
+            plt.text(x-0.3,y*1.1+0.15,string)
+    plt.plot (mass_x,mass_y, '-rx',markersize = 9)
+    plt.show()  
 
 
 
@@ -109,8 +124,9 @@ mass.sort()
 
 vars = (F_x(sort_mass(mass),relative_freq(sum(freq(mass)),freq(mass))))
 sorted_mass = sort_mass(mass)
+make_plot_of_freq (sorted_mass,freq(mass))
+make_plot_of_rel_freq (sorted_mass,relative_freq(len(mass),freq(mass)))
 
-make_plots (sorted_mass,freq(mass))
 
 #print (params (sort_mass(mass),freq(mass)))
 
