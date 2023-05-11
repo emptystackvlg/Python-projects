@@ -4,16 +4,13 @@ import matplotlib.pyplot as plt
 from os import system
 from math import sqrt
 def input_var ():
-    try:
-        system("cls")
-        path = fileopenbox (msg = "Выберите файл с данными")
-        
-        with open(path, "r") as file:
-            line = file.readline()
-            read_line = [float(x) for x in line.split()]
-            return (read_line)
-    except TypeError:
-        input_var()
+    system("cls")
+    path = fileopenbox (msg = "Выберите файл с данными")    
+    with open(path, "r") as file:
+        line = file.readline()
+        read_line = [float(x) for x in line.split()]
+    return (read_line)
+
 
 def sort_mass (main_mass):
     sorted_mass = []
@@ -46,18 +43,18 @@ def F_x (sort_mass,rel_freq):
             summ = 0 
             for j in range (i):
                 summ += rel_freq[j]
-            variables.append(summ)
+            variables.append(float("{0:.3f}".format(summ)))
         else : 
             variables.append(0)
-    variables.append(sum(rel_freq))
+    variables.append(float("{0:.1f}".format((sum(rel_freq)))))
     strings = []
     for i in range (len(sort_mass)):
         if (i!=0):
-            strings.append ("F_x = " + str(variables[i]) + "\t при \t\t" + str(sort_mass[i-1]) + " < " + " x <= " + str (sort_mass[i]))
+            strings.append ("F_x = " + str(variables[i]) + "\t при \t\t" + str(sort_mass[i-1]) + " < " + " x  <=  " + str (sort_mass[i]))
         else : 
             print ("\n\n")
-            strings.append ("F_x = " + str (variables[i]) + " \t при\t\t" + "x <= " + str (sort_mass[i]))
-    strings.append("F_x = " + str (variables[len(sort_mass)]) + "\t при \t\t" + "x > " + str(sort_mass[len(sort_mass)-1]))
+            strings.append ("F_x = " + str (variables[i]) + " \t при\t\t" + "x  <=  " + str (sort_mass[i]))
+    strings.append("F_x = " + str (variables[len(sort_mass)]) + "\t при \t\t" + "x  >  " + str(sort_mass[len(sort_mass)-1]))
     for i in strings:
         print (i + "\n\n")
     return variables
@@ -80,12 +77,14 @@ def make_plot_of_freq (mass_x,mass_y):
     plt.xlabel (r'$xi$')
     plt.ylabel(r'$ni$')
     plt.title ("Полигон частот")
+    labels = {}
     for i in range (len(mass_x)):
-            x = mass_x[i]
-            y = mass_y[i]
-            string = ("(" + str(x) + " ; " + str(y) + ")")
-            plt.text(x-0.4,y+0.4,string)
-    plt.plot (mass_x,mass_y, '-rx',markersize = 9)
+        x = mass_x[i]
+        y = mass_y[i]
+        string = ("(" + str(x) + " ; " + str(y) + ")")
+        labels[i] = string
+    plt.plot (mass_x,mass_y, '-rx',markersize = 9,label = labels)
+    plt.legend(bbox_to_anchor=(1,1), loc='upper left')
     plt.show()  
 
 def make_plot_of_rel_freq (mass_x,mass_y):
@@ -93,7 +92,7 @@ def make_plot_of_rel_freq (mass_x,mass_y):
     plt.xlim (0,max(mass_x)+1)
     plt.ylim (0,1)
     plt.xlabel (r'$xi$')
-    plt.ylabel(r'$ni$')
+    plt.ylabel(r'$ni/n$')
     plt.title ("Полигон относительных частот")
     for i in range (len(mass_x)):
             x = mass_x[i]
