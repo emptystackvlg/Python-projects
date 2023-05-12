@@ -39,8 +39,18 @@ def make_intervals (main_mass):
         print (intervals[key])
 
     return intervals
-
+def intervals_sort (main_mass,intervals):
+    sort_intervals = []
+    for key in intervals.keys():
+        ni = 0 
+        for var in main_mass:
+            if (intervals[key][0]<= var <intervals[key][1]):
+                ni += 1
+        sort_intervals.append (ni) 
+    if sum(sort_intervals) == len (main_mass):
+        return sort_intervals            
 main_mass = input_var()
 main_mass.sort()
 print (main_mass)
-make_intervals(main_mass)
+intervals = make_intervals(main_mass)
+print (intervals_sort(main_mass,intervals))
