@@ -70,6 +70,33 @@ def params (mass,freq):
     Sigma_v = sqrt(D_v)
     return (X_v,D_v,Sigma_v)
 
+def make_plot_fx (sorted_mass,variables):
+    plt.grid()
+    plt.xlim (0,max(sorted_mass)+1)
+    plt.ylim (0,1.2)
+    plt.xlabel (r'$x$')
+    plt.ylabel(r'$F_x$')
+    plt.title ("График эмпирической функции распределения")
+    legend_x = []
+    x_mass = []
+    y_mass = []
+    for x in sorted_mass:
+        if (x == max(sorted_mass)):
+            for i in range (2):
+                x_mass.append(x)
+            x_mass.append(x+1)
+        else:
+            for i in range (2):
+                x_mass.append(x)    
+    for y in variables:
+        if (y == 0):
+            y_mass.append(y)
+        else:
+            for i in range(2):
+                y_mass.append(y)
+    plt.plot (x_mass,y_mass)
+    plt.show ()
+
 def make_plot_of_freq (mass_x,mass_y):
     plt.grid()
     plt.xlim (0,max(mass_x)+1)
@@ -77,14 +104,16 @@ def make_plot_of_freq (mass_x,mass_y):
     plt.xlabel (r'$xi$')
     plt.ylabel(r'$ni$')
     plt.title ("Полигон частот")
-    labels = {}
+    legend_x = []
+    legend_y = []
     for i in range (len(mass_x)):
         x = mass_x[i]
         y = mass_y[i]
-        string = ("(" + str(x) + " ; " + str(y) + ")")
-        labels[i] = string
-    plt.plot (mass_x,mass_y, '-rx',markersize = 9,label = labels)
-    plt.legend(bbox_to_anchor=(1,1), loc='upper left')
+        x = float("{0:.4f}".format(x))
+        y = float("{0:.4f}".format(y))
+        legend_x.append(x)
+        legend_y.append(y)
+    plt.plot (mass_x,mass_y, '-ro',markersize = 5)
     plt.show()  
 
 def make_plot_of_rel_freq (mass_x,mass_y):
@@ -94,39 +123,38 @@ def make_plot_of_rel_freq (mass_x,mass_y):
     plt.xlabel (r'$xi$')
     plt.ylabel(r'$ni/n$')
     plt.title ("Полигон относительных частот")
+    legend_x = []
+    legend_y = []
     for i in range (len(mass_x)):
             x = mass_x[i]
             y = mass_y[i]
             x = float("{0:.4f}".format(x))
             y = float("{0:.4f}".format(y))
-            string = ("(" + str(x) + " ; " + str(y) + ")")
-            plt.text(x-0.3,y*1.1+0.15,string)
-    plt.plot (mass_x,mass_y, '-rx',markersize = 9)
+            legend_x.append(x)
+            legend_y.append(y)
+    plt.plot (mass_x,mass_y, '-ro',markersize = 5)
     plt.show()  
 
 
-
-def show_table (main_mass,mass_freq):
+def show_table (main_mass,sorted_mass,mass_freq):
+    print ("Вариационный ряд: \n" + str (main_mass))
     print (Fore.GREEN + "|x|",end = "")
-    for i in main_mass:
+    for i in sorted_mass:
         print (Fore.RED + "|" + str(i) + "|",end="")
     print (Style.RESET_ALL)
     print (Fore.LIGHTYELLOW_EX + "|n|",end = "")
     for i in mass_freq:
         print (Fore.BLUE + "| " + str(i) + " |",end="")
 
-
-
-
 mass = input_var()
 mass.sort()
 
 vars = (F_x(sort_mass(mass),relative_freq(sum(freq(mass)),freq(mass))))
 sorted_mass = sort_mass(mass)
-make_plot_of_freq (sorted_mass,freq(mass))
-make_plot_of_rel_freq (sorted_mass,relative_freq(len(mass),freq(mass)))
-
+#make_plot_of_freq (sorted_mass,freq(mass))
+#make_plot_of_rel_freq (sorted_mass,relative_freq(len(mass),freq(mass)))
+make_plot_fx(sorted_mass,vars)
 
 #print (params (sort_mass(mass),freq(mass)))
 
-#show_table (sort_mass(mass),freq(mass))
+show_table (mass,sort_mass(mass),freq(mass))

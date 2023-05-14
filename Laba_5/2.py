@@ -60,12 +60,12 @@ def mid_of_intervals (intervals):
         mid.append (ci)
     return mid
 
-def params (mass_of_ni,mid):
+def params (mass_of_ni,mid,n):
     x_v = 1 
     summ = 0
     for i in range (len(mass_of_ni)):
         summ += mass_of_ni [i] * mid[i]
-    x_v = float("{0:.3f}".format(summ/len(mass_of_ni)))
+    x_v = float("{0:.3f}".format(summ/n))
     summ = 0
     for i in range (len(mass_of_ni)):
         summ += mass_of_ni[i] * ((mid[i] - x_v)**2)
@@ -84,7 +84,7 @@ mass_ni = intervals_freq(main_mass,intervals)
 rel_freq = relative_freq (mass_ni,len (main_mass))
 print ("Относительные частоты : " + str (rel_freq))
 mid = mid_of_intervals (intervals)
-parametrs = params (mass_ni,mid)
+parametrs = params (mass_ni,mid,len(main_mass))
 print ("Параметры равны : \n")
 for key in parametrs.keys():
     print (key + " : " + str(parametrs[key]))
