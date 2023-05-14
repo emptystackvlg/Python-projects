@@ -112,11 +112,14 @@ def F_x (intervals,rel_freq):
         print (i + "\n\n")
     
     print (variables)
-    sorted_intervals.insert(0,sorted_intervals[0])
+    sorted_intervals.insert(0,sorted_intervals[0]-1)
     print (sorted_intervals)
-    
+    plt.grid()
+    plt.xlabel (r'$x$')
+    plt.ylabel(r'$F_x$')
+    plt.title ("График эмпирической функции распределения")
     plt.ylim(0,1.05)
-    plt.plot (sorted_intervals,variables)
+    plt.plot (sorted_intervals,variables,'-bo')
     plt.show()
 
 
