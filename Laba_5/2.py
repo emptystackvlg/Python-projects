@@ -2,7 +2,7 @@ from colorama import Fore,Back,Style
 from easygui import fileopenbox
 import matplotlib.pyplot as plt
 from os import system
-from math import sqrt,ceil
+from math import sqrt,ceil,fabs
 
 def input_var ():
     system("cls")
@@ -22,13 +22,17 @@ def make_intervals (main_mass):
     intervals = {}
     x_min = min(main_mass)
     x_max = max(main_mass)
-    num_of_intervals = int (input("Введите количество интервалов\n> "))
+    num_of_intervals = float (input("Введите количество интервалов\n> "))
     h = (x_max - x_min)/num_of_intervals
-    h = ceil(h)
+    dh = float ((ceil(h) - h))
+    dh *= num_of_intervals
+    dh = (float("{0:.4f}".format(dh)))
+    h = ceil(h)  
     print ("Шаг равен : " + str (h))
-    for i in range (num_of_intervals):
-        current_x = float (x_min)
-        intervals [i] = [float (current_x + h*i),float (current_x + h*(i+1))]
+    
+    current_x = float ("{0:.1f}".format (x_min - dh/2))
+    for i in range (int (num_of_intervals)):
+        intervals [i] = [float ("{0:.1f}".format(current_x)) + float("{0:.1f}".format(h*i)),float ("{0:.1f}".format(current_x)) + float("{0:.1f}".format(h*(i+1)))]
     for key in intervals.keys():
         print (intervals[key])
     return intervals
@@ -44,13 +48,13 @@ def intervals_freq (main_mass,intervals):
     if (sum (freq_intervals) == len (main_mass)):
         return freq_intervals            
     else :
-        print ("Ошибка, сумма ni != nss")
+        print ("Ошибка, сумма ni != n")
         exit(0)
 def relative_freq (mass_of_ni, count_n):
     rel_freq = []
     for ni in mass_of_ni:
         ni /= count_n
-        rel_freq.append (ni)
+        rel_freq.append (float("{0:.4f}".format(ni)))
     return rel_freq
 
 def mid_of_intervals (intervals):
@@ -74,6 +78,56 @@ def params (mass_of_ni,mid,n):
     parametrs = {'x_v': x_v, 'd_v' : d_v, 'Sigma_v' : Sigma_v}
     return parametrs
 
+def hyst_of_freq (x,intervals):
+    interval = []
+    for value in intervals.values():
+        for i in range (2):
+            interval.append (value[i])
+    sorted_intervals = []
+    for i in interval:
+        if (i not in sorted_intervals):
+            sorted_intervals.append(i)
+    print (sorted_intervals)
+    if (min(sorted_intervals) >= 0):
+        plt.xlim (0,max(sorted_intervals) + 1)
+    else :
+        plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
+    plt.hist(x,bins = sorted_intervals,edgecolor = 'red',histtype="bar",color="white")
+    plt.show()
+
+def hyst_of_rel_freq (freq_y,intervals):
+    interval = []
+    for value in intervals.values():
+        for i in range (2):
+            interval.append (value[i])
+    sorted_intervals = []
+    for i in interval:
+        if (i not in sorted_intervals):
+            sorted_intervals.append(i)
+    mass_x = []
+    for x in sorted_intervals:
+        if (x == sorted_intervals[0]) :
+            for j in range (2):
+                mass_x.append(x)
+        else:
+            for j in range (3):
+                mass_x.append(x)
+    mass_x.pop()
+    mass_y = []
+    mass_y.append(0)
+    for y in freq_y:
+        for i in range (2):
+            mass_y.append(y)
+        mass_y.append(0)
+    print (mass_x)
+    print (mass_y)
+    if (min(sorted_intervals) >= 0):
+        plt.xlim (0,max(sorted_intervals) + 1)
+    else :
+        plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
+    plt.ylim (0,1.05)
+    plt.plot (mass_x,mass_y)
+    plt.show()
 
 main_mass = input_var()
 main_mass.sort()
@@ -83,8 +137,10 @@ print ("Частоты :" + str(intervals_freq(main_mass,intervals)))
 mass_ni = intervals_freq(main_mass,intervals)
 rel_freq = relative_freq (mass_ni,len (main_mass))
 print ("Относительные частоты : " + str (rel_freq))
-mid = mid_of_intervals (intervals)
-parametrs = params (mass_ni,mid,len(main_mass))
-print ("Параметры равны : \n")
-for key in parametrs.keys():
-    print (key + " : " + str(parametrs[key]))
+# mid = mid_of_intervals (intervals)
+# parametrs = params (mass_ni,mid,len(main_mass))
+# print ("Параметры равны : \n")
+# for key in parametrs.keys():
+#     print (key + " : " + str(parametrs[key]))
+hyst_of_freq(main_mass,intervals)
+hyst_of_rel_freq(rel_freq,intervals)
