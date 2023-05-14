@@ -29,6 +29,7 @@ def make_intervals (main_mass):
     dh = float ((ceil(h) - h))
     dh *= num_of_intervals
     dh = (float("{0:.4f}".format(dh)))
+    print (dh/2)
     h = ceil(h)  
     print ("Шаг равен : " + str (h))
     
@@ -79,6 +80,46 @@ def params (mass_of_ni,mid,n):
     Sigma_v = float("{0:.3f}".format(sqrt (d_v)))
     parametrs = {'x_v': x_v, 'd_v' : d_v, 'Sigma_v' : Sigma_v}
     return parametrs
+
+def F_x (intervals,rel_freq):
+    variables = []
+    interval = []
+    for value in intervals.values():
+        for i in range (2):
+            interval.append (value[i])
+    sorted_intervals = []
+    for i in interval:
+        if (i not in sorted_intervals):
+            sorted_intervals.append(i)
+
+    for i in range (len(sorted_intervals)):
+            if (i!=0 ):
+                summ = 0 
+                for j in range (i):
+                    summ += rel_freq[j]
+                variables.append(float("{0:.3f}".format(summ)))
+            else : 
+                variables.append(0)
+    variables.append(float("{0:.1f}".format((sum(rel_freq)))))
+    strings = []
+    for i in range (len(sorted_intervals)):
+        if (i!=0):
+            strings.append ("F_x = " + str(variables[i]) + "\t при \t\t" + str(sorted_intervals[i-1]) + " < " + " x  <=  " + str (sorted_intervals[i]))
+        else : 
+            print ("\n\n")
+            strings.append ("F_x = " + str (variables[i]) + " \t при\t\t" + "x  <=  " + str (sorted_intervals[i]))
+    for i in strings:
+        print (i + "\n\n")
+    
+    print (variables)
+    sorted_intervals.insert(0,sorted_intervals[0])
+    print (sorted_intervals)
+    
+    plt.ylim(0,1.05)
+    plt.plot (sorted_intervals,variables)
+    plt.show()
+
+
 
 def hyst_of_freq (x,intervals):
     interval = []
@@ -169,9 +210,10 @@ mass_ni = intervals_freq(main_mass,intervals)
 rel_freq = relative_freq (mass_ni,len (main_mass))
 print ("Относительные частоты : " + str (rel_freq))
 mid = mid_of_intervals (intervals)
-parametrs = params (mass_ni,mid,len(main_mass))
-print ("Параметры равны : \n")
-for key in parametrs.keys():
-    print (key + " : " + str(parametrs[key]))
-hyst_of_freq(mass_ni,intervals)
-hyst_of_rel_freq(rel_freq,intervals)
+#parametrs = params (mass_ni,mid,len(main_mass))
+#print ("Параметры равны : \n")
+#for key in parametrs.keys():
+  #  print (key + " : " + str(parametrs[key]))
+#hyst_of_freq(mass_ni,intervals)
+#hyst_of_rel_freq(rel_freq,intervals)
+F_x(intervals,rel_freq)
