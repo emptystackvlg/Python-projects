@@ -18,11 +18,13 @@ def input_var ():
             for j in temp_mass[i] :
                 main_mass.append(j)
     return (main_mass)
+
 def make_intervals (main_mass):
     intervals = {}
     x_min = min(main_mass)
     x_max = max(main_mass)
     num_of_intervals = float (input("Введите количество интервалов\n> "))
+    global h
     h = (x_max - x_min)/num_of_intervals
     dh = float ((ceil(h) - h))
     dh *= num_of_intervals
@@ -92,7 +94,33 @@ def hyst_of_freq (x,intervals):
         plt.xlim (0,max(sorted_intervals) + 1)
     else :
         plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
-    plt.hist(x,bins = sorted_intervals,edgecolor = 'red',histtype="bar",color="white")
+    nh = []
+    for n in x:
+        nh.append(float("{0:.3f}".format(n/h)))
+    mass_x = []
+    for x in sorted_intervals:
+        if (x == sorted_intervals[0]) :
+            for j in range (2):
+                mass_x.append(x)
+        else:
+            for j in range (3):
+                mass_x.append(x)
+    mass_x.pop()
+    mass_y = []
+    mass_y.append(0)
+    for y in nh:
+        for i in range (2):
+            mass_y.append(y)
+        mass_y.append(0)
+    if (min(sorted_intervals) >= 0):
+        plt.xlim (0,max(sorted_intervals) + 1)
+    else :
+        plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
+    plt.title ("Гистограмма частот")
+    plt.xlabel(r'$x$')
+    plt.ylabel(r'$ni/h$')
+    plt.ylim (0,max(nh) + 0.1 )
+    plt.plot (mass_x,mass_y)
     plt.show()
 
 def hyst_of_rel_freq (freq_y,intervals):
@@ -117,7 +145,7 @@ def hyst_of_rel_freq (freq_y,intervals):
     mass_y.append(0)
     for y in freq_y:
         for i in range (2):
-            mass_y.append(y)
+            mass_y.append(float("{0:.3f}".format(y/h)))
         mass_y.append(0)
     print (mass_x)
     print (mass_y)
@@ -125,7 +153,10 @@ def hyst_of_rel_freq (freq_y,intervals):
         plt.xlim (0,max(sorted_intervals) + 1)
     else :
         plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
-    plt.ylim (0,1.05)
+    plt.title ("Гистограмма относительных частот")
+    plt.xlabel(r'$x$')
+    plt.ylabel(r'$wi/h$')
+    plt.ylim (0,max(mass_y)+ 0.1)
     plt.plot (mass_x,mass_y)
     plt.show()
 
@@ -137,10 +168,10 @@ print ("Частоты :" + str(intervals_freq(main_mass,intervals)))
 mass_ni = intervals_freq(main_mass,intervals)
 rel_freq = relative_freq (mass_ni,len (main_mass))
 print ("Относительные частоты : " + str (rel_freq))
-# mid = mid_of_intervals (intervals)
-# parametrs = params (mass_ni,mid,len(main_mass))
-# print ("Параметры равны : \n")
-# for key in parametrs.keys():
-#     print (key + " : " + str(parametrs[key]))
-hyst_of_freq(main_mass,intervals)
+mid = mid_of_intervals (intervals)
+parametrs = params (mass_ni,mid,len(main_mass))
+print ("Параметры равны : \n")
+for key in parametrs.keys():
+    print (key + " : " + str(parametrs[key]))
+hyst_of_freq(mass_ni,intervals)
 hyst_of_rel_freq(rel_freq,intervals)
