@@ -4,8 +4,8 @@ from os import system,path
 from math import sqrt
 def input_var ():
     system("cls")
-    path = fileopenbox (msg = "Выберите файл с данными")    
-    with open(path, "r") as file:
+    path_f = fileopenbox (msg = "Выберите файл с данными")    
+    with open(path_f, "r") as file:
         line = file.readline()
         read_line = [float(x) for x in line.split()]
     return (read_line)
