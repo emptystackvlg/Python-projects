@@ -124,14 +124,8 @@ def make_plot_of_rel_freq (mass_x,mass_y):
     plt.savefig('rel_freq_pol.png')
     print ("\nПолигон сохранён в директории " + str(path.abspath('rel_freq_pol.png')))
     plt.show()  
-
-
-    
-
 mass = input_var()
 mass.sort()
-
-
 
 def menu ():
     system("cls")
@@ -143,8 +137,6 @@ def menu ():
     sorted_mass = sort_mass(mass)
     freq_mass = freq (mass)
     rel_freq_mass = relative_freq(len(mass),freq_mass)
-
-
     if (mode == 0):
         system("cls")
         exit(0)
