@@ -115,6 +115,8 @@ def F_x (intervals,rel_freq):
     sorted_intervals.insert(0,sorted_intervals[0]-1)
     print (sorted_intervals)
     plt.grid()
+    plt.xticks(sorted_intervals)
+    plt.yticks(variables)
     plt.xlabel (r'$x$')
     plt.ylabel(r'$F_x$')
     plt.title ("График эмпирической функции распределения")
@@ -161,10 +163,12 @@ def hyst_of_freq (x,intervals):
     else :
         plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
     plt.title ("Гистограмма частот")
+    plt.xticks(sorted_intervals)
+    plt.yticks(nh)
     plt.xlabel(r'$x$')
     plt.ylabel(r'$ni/h$')
     plt.ylim (0,max(nh) + 0.1 )
-    plt.plot (mass_x,mass_y)
+    plt.plot (mass_x,mass_y,'r')
     plt.show()
 
 def hyst_of_rel_freq (freq_y,intervals):
@@ -191,15 +195,21 @@ def hyst_of_rel_freq (freq_y,intervals):
         for i in range (2):
             mass_y.append(float("{0:.3f}".format(y/h)))
         mass_y.append(0)
+    y_to_plot = []
+    for yp in freq_y:
+        y_to_plot.append(float("{0:.3f}".format(yp/h)))
     print (mass_x)
     print (mass_y)
     if (min(sorted_intervals) >= 0):
         plt.xlim (0,max(sorted_intervals) + 1)
     else :
         plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
+    plt.grid()
     plt.title ("Гистограмма относительных частот")
     plt.xlabel(r'$x$')
     plt.ylabel(r'$wi/h$')
+    plt.xticks(sorted_intervals)
+    plt.yticks(y_to_plot)
     plt.ylim (0,max(mass_y)+ 0.1)
     plt.plot (mass_x,mass_y)
     plt.show()
