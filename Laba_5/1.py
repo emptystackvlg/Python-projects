@@ -4,11 +4,18 @@ from os import system,path
 from math import sqrt
 def input_var ():
     system("cls")
-    path_f = fileopenbox (msg = "Выберите файл с данными")    
+    path_f = fileopenbox (msg = "Выберите файл с данными")
+    temp_mass = []
+    main_mass = []
     with open(path_f, "r") as file:
-        line = file.readline()
-        read_line = [float(x) for x in line.split()]
-    return (read_line)
+        lines = file.readlines()
+        for line in lines: 
+            read_line = [float(x) for x in line.split()]
+            temp_mass.append(read_line)
+        for i in range (len(temp_mass)):
+            for j in temp_mass[i] :
+                main_mass.append(j)
+    return (main_mass)
 
 
 def sort_mass (main_mass):
@@ -75,7 +82,7 @@ def params (mass,freq):
 
 def make_plot_fx (sorted_mass,variables):
     plt.grid()
-    plt.xlim (0,max(sorted_mass)+1)
+    plt.xlim (min(sorted_mass) -1 ,max(sorted_mass)+1)
     plt.ylim (0,1.05)
     plt.xlabel (r'$x$')
     plt.ylabel(r'$F*(x)$')
@@ -103,7 +110,7 @@ def make_plot_fx (sorted_mass,variables):
 
 def make_plot_of_freq (mass_x,mass_y):
     plt.grid()
-    plt.xlim (0,max(mass_x)+1)
+    plt.xlim (min(mass_x) -1 ,max(mass_x)+1)
     plt.ylim (0,max (mass_y)+1)
     plt.xlabel (r'$xi$')
     plt.ylabel(r'$ni$')
@@ -115,7 +122,7 @@ def make_plot_of_freq (mass_x,mass_y):
 
 def make_plot_of_rel_freq (mass_x,mass_y):
     plt.grid()
-    plt.xlim (0,max(mass_x)+1)
+    plt.xlim (min(mass_x) -1 ,max(mass_x)+1)
     plt.ylim (0,max(mass_y) + 0.05)
     plt.xlabel (r'$xi$')
     plt.ylabel(r'$ni/n (wi)$')

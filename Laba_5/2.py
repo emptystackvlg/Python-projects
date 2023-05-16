@@ -216,7 +216,7 @@ mid = mid_of_intervals (intervals)
 #parametrs = params (mass_ni,mid,len(main_mass))
 #print ("Параметры равны : \n")
 #for key in parametrs.keys():
-  #  print (key + " : " + str(parametrs[key]))
+#  print (key + " : " + str(parametrs[key]))
 #hyst_of_freq(mass_ni,intervals)
 #hyst_of_rel_freq(rel_freq,intervals)
 F_x(intervals,rel_freq)
