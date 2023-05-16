@@ -10,7 +10,7 @@ def input_var ():
     with open(path_f, "r") as file:
         lines = file.readlines()
         for line in lines: 
-            read_line = [float(x) for x in line.split()]
+            read_line = [int(x) for x in line.split()]
             temp_mass.append(read_line)
         for i in range (len(temp_mass)):
             for j in temp_mass[i] :
@@ -29,7 +29,7 @@ def freq (main_list):
     old_i = []
     for i in main_list:
             if (i not in old_i):
-                mass_freq.append(float (main_list.count(i)))
+                mass_freq.append(int(main_list.count(i)))
             old_i.append(i)
     return (mass_freq)
 
@@ -81,7 +81,7 @@ def params (mass,freq):
     return (X_v,D_v,Sigma_v)
 
 def make_plot_fx (sorted_mass,variables):
-    plt.grid()
+    plt.grid(axis='y',drawstyle = 'steps-post')
     plt.xlim (min(sorted_mass) -1 ,max(sorted_mass)+1)
     plt.ylim (0,1.05)
     plt.xlabel (r'$x$')
@@ -103,7 +103,7 @@ def make_plot_fx (sorted_mass,variables):
         else:
             for i in range(2):
                 y_mass.append(y)
-    plt.xticks(x_mass)
+    plt.xticks(x_mass,rotation = 'vertical')
     plt.yticks(y_mass)
     plt.plot (x_mass,y_mass)
     plt.savefig('f_x_plot.png')

@@ -162,6 +162,7 @@ def hyst_of_freq (x,intervals):
         plt.xlim (0,max(sorted_intervals) + 1)
     else :
         plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
+    plt.grid(axis='y')
     plt.title ("Гистограмма частот")
     plt.xticks(sorted_intervals)
     plt.yticks(nh)
@@ -204,7 +205,7 @@ def hyst_of_rel_freq (freq_y,intervals):
         plt.xlim (0,max(sorted_intervals) + 1)
     else :
         plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
-    plt.grid()
+    plt.grid(axis='y')
     plt.title ("Гистограмма относительных частот")
     plt.xlabel(r'$x$')
     plt.ylabel(r'$wi/h$')
@@ -227,6 +228,6 @@ mid = mid_of_intervals (intervals)
 #print ("Параметры равны : \n")
 #for key in parametrs.keys():
 #  print (key + " : " + str(parametrs[key]))
-#hyst_of_freq(mass_ni,intervals)
-#hyst_of_rel_freq(rel_freq,intervals)
-F_x(intervals,rel_freq)
+hyst_of_freq(mass_ni,intervals)
+hyst_of_rel_freq(rel_freq,intervals)
+#F_x(intervals,rel_freq)
