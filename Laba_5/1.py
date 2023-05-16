@@ -56,7 +56,7 @@ def F_x (sort_mass,rel_freq):
     strings = []
     variables_to_show = []
     for var in variables:
-        var = float("{0:.4f}".format(var))
+        var = float("{0:.3f}".format(var))
         variables_to_show.append(var)
     for i in range (len(sort_mass)):
         if (i == 0):
@@ -103,6 +103,8 @@ def make_plot_fx (sorted_mass,variables):
         else:
             for i in range(2):
                 y_mass.append(y)
+    plt.xticks(x_mass)
+    plt.yticks(y_mass)
     plt.plot (x_mass,y_mass)
     plt.savefig('f_x_plot.png')
     print ("\nГрафик сохранён в директории " + str(path.abspath('f_x_plot.png')))
@@ -115,6 +117,8 @@ def make_plot_of_freq (mass_x,mass_y):
     plt.xlabel (r'$xi$')
     plt.ylabel(r'$ni$')
     plt.title ("Полигон частот")
+    plt.xticks(mass_x)
+    plt.yticks(mass_y)
     plt.plot (mass_x,mass_y, '-ro',markersize = 5)
     plt.savefig('freq_pol.png')
     print ("\nПолигон сохранён в директории " + str(path.abspath('freq_pol.png')))
@@ -128,6 +132,8 @@ def make_plot_of_rel_freq (mass_x,mass_y):
     plt.ylabel(r'$ni/n (wi)$')
     plt.title ("Полигон относительных частот")
     plt.plot (mass_x,mass_y, '-ro',markersize = 5)
+    plt.xticks(mass_x)
+    plt.yticks(mass_y)
     plt.savefig('rel_freq_pol.png')
     print ("\nПолигон сохранён в директории " + str(path.abspath('rel_freq_pol.png')))
     plt.show()  
@@ -173,15 +179,15 @@ def menu ():
             i = float("{0:.4f}".format(i))
             rel_freq_to_show.append(i)
         print ("wi :  " + str (rel_freq_to_show))
-        make_plot_of_rel_freq(sorted_mass,rel_freq_mass)
+        make_plot_of_rel_freq(sorted_mass,rel_freq_to_show)
         print ("\n")
         system ("pause")
         menu ()
     elif (mode == 4):
         system("cls")
         print ("Эмпирическая функция распределения F*(x) :\n")
-        variables = F_x(sorted_mass,rel_freq_mass)
-        make_plot_fx(sorted_mass,variables)
+        variables_show = F_x(sorted_mass,rel_freq_mass)
+        make_plot_fx(sorted_mass,variables_show)
         print ("\n")
         system ("pause")
         menu ()
