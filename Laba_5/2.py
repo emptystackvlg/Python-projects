@@ -2,7 +2,7 @@ from colorama import Fore,Back,Style
 from easygui import fileopenbox
 import matplotlib.pyplot as plt
 from os import system
-from math import sqrt,ceil,fabs
+from math import sqrt,fabs,log10,floor
 
 def input_var ():
     system("cls")
@@ -23,19 +23,27 @@ def make_intervals (main_mass):
     intervals = {}
     x_min = min(main_mass)
     x_max = max(main_mass)
+    k = 1 + 3.322 * log10(len(main_mass))
+    k = floor(k)
+    print ("Оптимальное количество интервалов : " + str(k) + "\n")
     num_of_intervals = float (input("Введите количество интервалов\n> "))
     global h
     h = (x_max - x_min)/num_of_intervals
-    dh = float ((ceil(h) - h))
-    dh *= num_of_intervals
-    dh = (float("{0:.4f}".format(dh)))
-    print (dh/2)
-    h = ceil(h)  
-    print ("Шаг равен : " + str (h))
-    
-    current_x = float ("{0:.1f}".format (x_min - dh/2))
+    if (h >= 0.5):  
+        dh = fabs(float ((round(h) - h)))
+        dh *= num_of_intervals
+        dh = (float("{0:.4f}".format(dh)))
+        dh /= 2
+        h = round (h)
+        if (dh == 0):
+            h += 0.001
+    else :
+        h = round(h,4)
+        h += 0.001   
+        dh = 0 
+    current_x = float ("{0:.4f}".format (x_min - dh))
     for i in range (int (num_of_intervals)):
-        intervals [i] = [float ("{0:.1f}".format(current_x)) + float("{0:.1f}".format(h*i)),float ("{0:.1f}".format(current_x)) + float("{0:.1f}".format(h*(i+1)))]
+        intervals [i] = [float ("{0:.4f}".format(current_x)) + float("{0:.4f}".format(h*i)),float ("{0:.4f}".format(current_x)) + float("{0:.4f}".format(h*(i+1)))]
     for key in intervals.keys():
         print (intervals[key])
     return intervals
@@ -78,7 +86,7 @@ def params (mass_of_ni,mid,n):
         summ += mass_of_ni[i] * ((mid[i] - x_v)**2)
     d_v = float("{0:.3f}".format(summ/len (mass_of_ni)))
     Sigma_v = float("{0:.3f}".format(sqrt (d_v)))
-    parametrs = {'x_v': x_v, 'd_v' : d_v, 'Sigma_v' : Sigma_v}
+    parametrs = [x_v, d_v,Sigma_v]
     return parametrs
 
 def F_x (intervals,rel_freq):
@@ -92,36 +100,57 @@ def F_x (intervals,rel_freq):
         if (i not in sorted_intervals):
             sorted_intervals.append(i)
 
-    for i in range (len(sorted_intervals)):
-            if (i!=0 ):
-                summ = 0 
-                for j in range (i):
-                    summ += rel_freq[j]
-                variables.append(float("{0:.3f}".format(summ)))
-            else : 
-                variables.append(0)
-    variables.append(float("{0:.1f}".format((sum(rel_freq)))))
-    strings = []
-    for i in range (len(sorted_intervals)):
-        if (i!=0):
-            strings.append ("F_x = " + str(variables[i]) + "\t при \t\t" + str(sorted_intervals[i-1]) + " < " + " x  <=  " + str (sorted_intervals[i]))
-        else : 
-            print ("\n\n")
-            strings.append ("F_x = " + str (variables[i]) + " \t при\t\t" + "x  <=  " + str (sorted_intervals[i]))
-    for i in strings:
-        print (i + "\n\n")
-    
-    print (variables)
-    sorted_intervals.insert(0,sorted_intervals[0]-1)
+    for i in range (len(rel_freq)):
+            summ = 0 
+            for j in range (i+1):
+                summ += rel_freq[j]
+            variables.append(float("{0:.4f}".format(summ)))
+
+    for i in range (len(rel_freq)):
+        print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )")
+        print (" Относительная частота : " + str (rel_freq[i]) + "\n Накопленная относительная частота : " + str(variables[i]))
+        print ("\n")
+    return (sorted_intervals,variables)
+
+def F_x_group (mids,rel_freq):
+    variables = []
+    for i in range (len(rel_freq)):
+            
+            summ = 0 
+            for j in range (i+1):
+                summ += rel_freq[j]
+            variables.append (summ)
+
+    for i in range (len(rel_freq)):
+        print (" Номер интервала : " + str(i+1) + "\n Середина интервала : " + str (mids[i]))
+        print (" Относительная частота : " + str (rel_freq[i]) + "\n Накопленная относительная частота : " + str(variables[i]))
+        print ("\n")
+    return variables
+
+def plot_of_fx (sorted_intervals,variables):
     print (sorted_intervals)
+    print (variables)
+    variables.insert (0,0)
     plt.grid()
-    plt.xticks(sorted_intervals)
+    plt.xticks(sorted_intervals,rotation = 'vertical')
     plt.yticks(variables)
     plt.xlabel (r'$x$')
-    plt.ylabel(r'$F_x$')
-    plt.title ("График эмпирической функции распределения")
+    plt.ylabel(r'$F*(x)$')
+    plt.title ("График эмпирической функции распределения\nдля интервального ряда")
     plt.ylim(0,1.05)
     plt.plot (sorted_intervals,variables,'-bo')
+    plt.show()
+
+
+def plot_of_fx_group (mids,variables):
+    plt.grid()
+    plt.xticks(mids,rotation = 'vertical')
+    plt.yticks(variables)
+    plt.xlabel (r'$x$')
+    plt.ylabel(r'$F*(x)$')
+    plt.title ("График эмпирической функции распределения\nдля группированного ряда")
+    plt.ylim(0,1.05)
+    plt.plot (mids,variables,'-ro')
     plt.show()
 
 
@@ -135,11 +164,10 @@ def hyst_of_freq (x,intervals):
     for i in interval:
         if (i not in sorted_intervals):
             sorted_intervals.append(i)
-    print (sorted_intervals)
     if (min(sorted_intervals) >= 0):
-        plt.xlim (0,max(sorted_intervals) + 1)
+        plt.xlim (min(sorted_intervals) - 1,max(sorted_intervals) + 1)
     else :
-        plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
+        plt.xlim (min(sorted_intervals) - 1,max(sorted_intervals) + 1)
     nh = []
     for n in x:
         nh.append(float("{0:.3f}".format(n/h)))
@@ -159,16 +187,16 @@ def hyst_of_freq (x,intervals):
             mass_y.append(y)
         mass_y.append(0)
     if (min(sorted_intervals) >= 0):
-        plt.xlim (0,max(sorted_intervals) + 1)
+        plt.xlim (min(sorted_intervals) - 0.5,max(sorted_intervals) + 0.5)
     else :
-        plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
+        plt.xlim (min(sorted_intervals) -0.5,max(sorted_intervals) + 0.5)
     plt.grid(axis='y')
     plt.title ("Гистограмма частот")
-    plt.xticks(sorted_intervals)
+    plt.xticks(sorted_intervals,rotation = 'vertical')
     plt.yticks(nh)
     plt.xlabel(r'$x$')
     plt.ylabel(r'$ni/h$')
-    plt.ylim (0,max(nh) + 0.1 )
+    plt.ylim (0,max(nh) + 5)
     plt.plot (mass_x,mass_y,'r')
     plt.show()
 
@@ -199,35 +227,139 @@ def hyst_of_rel_freq (freq_y,intervals):
     y_to_plot = []
     for yp in freq_y:
         y_to_plot.append(float("{0:.3f}".format(yp/h)))
-    print (mass_x)
-    print (mass_y)
     if (min(sorted_intervals) >= 0):
-        plt.xlim (0,max(sorted_intervals) + 1)
+        plt.xlim (min(sorted_intervals) - 1,max(sorted_intervals) + 1)
     else :
         plt.xlim (min(sorted_intervals) -1,max(sorted_intervals) + 1)
     plt.grid(axis='y')
     plt.title ("Гистограмма относительных частот")
     plt.xlabel(r'$x$')
     plt.ylabel(r'$wi/h$')
-    plt.xticks(sorted_intervals)
+    plt.xticks(sorted_intervals,rotation = 'vertical')
     plt.yticks(y_to_plot)
     plt.ylim (0,max(mass_y)+ 0.1)
     plt.plot (mass_x,mass_y)
     plt.show()
 
+
+def polygon_of_freq(mids,freq):
+    plt.grid()
+    plt.title ("Полигон распределения частот")
+    plt.xlabel(r'$xc$')
+    plt.ylabel(r'$ni$')
+    plt.xticks(mids)
+    plt.yticks(freq)
+    plt.ylim (0,max(freq)+ 1)
+    plt.xlim (min(mids) - 1,max(mids) + 1)
+    plt.plot (mids,freq,'-ro')
+    plt.show()
+
+def polygon_of_rel_freq (mids,rel_freq):
+    plt.grid()
+    plt.title ("Полигон распределения относительных частот")
+    plt.xlabel(r'$xc$')
+    plt.ylabel(r'$wi$')
+    plt.xticks(mids)
+    plt.yticks(rel_freq)
+    plt.ylim (0,max(rel_freq)+ 0.1)
+    plt.xlim (min(mids) - 1,max(mids) + 1)
+    plt.plot (mids,rel_freq,'-ro')
+    plt.show()
+
+
+
+
 main_mass = input_var()
 main_mass.sort()
-print (main_mass)
 intervals = make_intervals(main_mass)
-print ("Частоты :" + str(intervals_freq(main_mass,intervals)))
-mass_ni = intervals_freq(main_mass,intervals)
-rel_freq = relative_freq (mass_ni,len (main_mass))
-print ("Относительные частоты : " + str (rel_freq))
-mid = mid_of_intervals (intervals)
-#parametrs = params (mass_ni,mid,len(main_mass))
-#print ("Параметры равны : \n")
-#for key in parametrs.keys():
-#  print (key + " : " + str(parametrs[key]))
-hyst_of_freq(mass_ni,intervals)
-hyst_of_rel_freq(rel_freq,intervals)
-#F_x(intervals,rel_freq)
+
+def menu():
+    system("cls")
+    print ("Выберите нужный пункт : \n")
+    print ("\t1. Вывод введенной информации на экран\n\n"+"\t2. Составление и вывод на экран интервального ряда частот и относительных частот, построение гистограмм\n\n" + 
+           "\t3. Составление и вывод на экран группированного ряда частот и относительных частот, построение полигонов\n\n"+"\t4. Нахождение эмпирической функции распределения F*(x) для интервального ряда вывод ее на экран и построение графика\n\n"
+           +"\t5. Нахождение эмпирической функции распределения F*(x) для группированного ряда вывод ее на экран и построение графика\n\n"+"\t6. Вычисление числовых характеристик и вывод на экран полученных результатов\n\n"+"\tВведите 0 для выхода\n\n")
+    mode = int(input("> "))
+    interval = []
+    for value in intervals.values():
+        for i in range (2):
+            interval.append (value[i])
+    sorted_intervals = []
+    for i in interval:
+        if (i not in sorted_intervals):
+            sorted_intervals.append(i)
+
+    mass_freq = intervals_freq (main_mass,intervals)
+    mass_rel_freq = relative_freq(mass_freq,len(main_mass))
+    mids = mid_of_intervals(intervals)
+    if (mode == 0):
+        system("cls")
+        exit(0)
+    elif (mode == 1):
+        system ("cls")
+        print (" Вариационный ряд: \n\n\t" + str (main_mass))
+        print ("\n")
+        print (" Интервалы: \n")
+        for i in range (len(intervals.values())):
+            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )\n")
+        system("pause")
+        menu()
+    elif (mode == 2):
+        system ("cls")
+        print (" Интервальный ряд частот : \n")
+        for i in range (len(intervals.values())):
+            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )\n")
+            print (" Частота : " + str (mass_freq[i]) + "\n")
+        hyst_of_freq(mass_freq,intervals)
+        system("pause")
+        system("cls")
+        print (" Интервальный ряд относительных частот : \n")
+        for i in range (len(intervals.values())):
+            print (" Номер интервала : " + str(i+1) + "\n Интервал : [ " + str (sorted_intervals[i]) + " ; " + str (sorted_intervals[i+1]) + " )\n")
+            print (" Относительная частота : " + str (mass_rel_freq[i]) + "\n")
+        hyst_of_rel_freq(mass_rel_freq,intervals)
+        system ("pause")
+        menu()
+    elif (mode == 3):
+        system ("cls")
+        print (" Группированный ряд распределения частот : \n")
+        for i in range (len(intervals.values())):
+            print (" Номер интервала : " + str(i+1) + "\n Середина интервала : " + str (mids[i] )+ "\n")
+            print (" Частота : " + str (mass_freq[i]) + "\n")
+        polygon_of_freq(mids,mass_freq)
+        system("pause")
+        system("cls")
+        print (" Группированный ряд распределения относительных частот : \n")
+        for i in range (len(intervals.values())):
+            print (" Номер интервала : " + str(i+1) + "\n Середина интервала : " + str (mids[i] )+ "\n")
+            print (" Относительная частота : " + str (mass_freq[i]) + "\n")
+        polygon_of_rel_freq(mids,mass_rel_freq)
+        system ("pause")
+        menu()
+    elif (mode == 4):
+        system ("cls")
+        print (" Эмпирическая функция распределения для интервального ряда : \n")
+        data_to_plot = F_x (intervals,mass_rel_freq)
+        plot_of_fx(data_to_plot[0],data_to_plot[1])
+        print ("\n")
+        system("pause")
+        menu()
+    elif (mode == 5) :
+        system ("cls")
+        print (" Эмпирическая функция распределения для группированного ряда : \n")
+        vars = F_x_group(mids,mass_rel_freq)
+        plot_of_fx_group (mids,vars)
+        print ("\n")
+        system("pause")
+        menu ()
+    elif (mode == 6):
+        system("cls")
+        parameters = params(mass_freq,mids,len(main_mass))
+        print (" Числовые параметры выборки : \n")
+        print ("\tX_v = " + str(parameters[0]) + "\n")
+        print ("\tD_v = " + str(parameters[1]) + "\n")
+        print ("\tSigma_v = " + str(parameters[2]) + "\n")
+        print ("\n")
+        system ("pause")
+        menu ()
+menu()  
