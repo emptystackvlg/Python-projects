@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from os import system
 from math import sqrt,fabs,log10,floor
 
-def input_var ():
+def input_var () -> list:
     system("cls")
     path = fileopenbox (msg = "Выберите файл с данными")
     temp_mass = []
@@ -19,7 +19,7 @@ def input_var ():
                 main_mass.append(j)
     return (main_mass)
 
-def make_intervals (main_mass):
+def make_intervals (main_mass) -> dict:
     intervals = {}
     x_min = min(main_mass)
     x_max = max(main_mass)
@@ -44,11 +44,9 @@ def make_intervals (main_mass):
     current_x = float ("{0:.4f}".format (x_min - dh))
     for i in range (int (num_of_intervals)):
         intervals [i] = [float ("{0:.4f}".format(current_x)) + float("{0:.4f}".format(h*i)),float ("{0:.4f}".format(current_x)) + float("{0:.4f}".format(h*(i+1)))]
-    for key in intervals.keys():
-        print (intervals[key])
     return intervals
 
-def intervals_freq (main_mass,intervals):
+def intervals_freq (main_mass,intervals) -> list:
     freq_intervals = []
     for key in intervals.keys():
         ni = 0 
@@ -61,21 +59,21 @@ def intervals_freq (main_mass,intervals):
     else :
         print ("Ошибка, сумма ni != n")
         exit(0)
-def relative_freq (mass_of_ni, count_n):
+def relative_freq (mass_of_ni, count_n) -> list:
     rel_freq = []
     for ni in mass_of_ni:
         ni /= count_n
         rel_freq.append (float("{0:.4f}".format(ni)))
     return rel_freq
 
-def mid_of_intervals (intervals):
+def mid_of_intervals (intervals) -> list:
     mid = []
     for key in intervals.keys():
         ci = sum(intervals[key]) / 2
         mid.append (ci)
     return mid
 
-def params (mass_of_ni,mid,n):
+def params (mass_of_ni,mid,n) -> list:
     x_v = 1 
     summ = 0
     for i in range (len(mass_of_ni)):
@@ -89,7 +87,7 @@ def params (mass_of_ni,mid,n):
     parametrs = [x_v, d_v,Sigma_v]
     return parametrs
 
-def F_x (intervals,rel_freq):
+def F_x (intervals,rel_freq) -> list:
     variables = []
     interval = []
     for value in intervals.values():
@@ -112,7 +110,7 @@ def F_x (intervals,rel_freq):
         print ("\n")
     return (sorted_intervals,variables)
 
-def F_x_group (mids,rel_freq):
+def F_x_group (mids,rel_freq) -> list:
     variables = []
     for i in range (len(rel_freq)):
             
@@ -128,8 +126,6 @@ def F_x_group (mids,rel_freq):
     return variables
 
 def plot_of_fx (sorted_intervals,variables):
-    print (sorted_intervals)
-    print (variables)
     variables.insert (0,0)
     plt.grid()
     plt.xticks(sorted_intervals,rotation = 'vertical')
@@ -247,7 +243,7 @@ def polygon_of_freq(mids,freq):
     plt.title ("Полигон распределения частот")
     plt.xlabel(r'$xc$')
     plt.ylabel(r'$ni$')
-    plt.xticks(mids)
+    plt.xticks(mids,rotation = 'vertical')
     plt.yticks(freq)
     plt.ylim (0,max(freq)+ 1)
     plt.xlim (min(mids) - 1,max(mids) + 1)
@@ -259,7 +255,7 @@ def polygon_of_rel_freq (mids,rel_freq):
     plt.title ("Полигон распределения относительных частот")
     plt.xlabel(r'$xc$')
     plt.ylabel(r'$wi$')
-    plt.xticks(mids)
+    plt.xticks(mids,rotation = 'vertical')
     plt.yticks(rel_freq)
     plt.ylim (0,max(rel_freq)+ 0.1)
     plt.xlim (min(mids) - 1,max(mids) + 1)
