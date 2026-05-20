@@ -1,6 +1,5 @@
 from tkinter.font import names
 
-
 def install_libs () : 
     from os import system
     system ("pip install easygui")
@@ -13,7 +12,7 @@ try :
     from win10toast_click import ToastNotifier as tf 
     from easygui import diropenbox
     from os import chdir
-except : 
+except ModuleNotFoundError: 
     install_libs ()
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
