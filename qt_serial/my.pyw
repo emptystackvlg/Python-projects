@@ -59,7 +59,7 @@ def read_data():
         ui.lcdCurrent.display(int (data))
         ui.lcdPower.display(int (data)*int (data))
         
-def fan_speed_checkbox ():
+def fan_speed_checkbox ():                                              #функция для работы со скоростью вентиляторов
     if (str(ui.checkBoxFanMode.checkState()) == "CheckState.Unchecked"):
         ui.pushButtonFanSpeed.setEnabled(1)
         ui.lineEditFanSpeed.setReadOnly (0)
