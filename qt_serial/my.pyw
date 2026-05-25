@@ -6,7 +6,25 @@ from time import sleep
 app = QtWidgets.QApplication([])
 current_port = QSerialPort ()
 timer = QTimer()
-data_blocks = list()
+data_blocks = list()                                                     #глобальная перменная для хранения блоков полученных данных
+data = ""
+
+
+def show_params():                                                      #функция  для обработки и обновления данных в  интерфейсе
+    global data,data_blocks                                                  
+    if (ui.tabWidget.currentIndex() == 0):                              #если открыта вкладка "Мониторинг", обновляем в ней все данные
+        try:                                                            #обрабатываем ошибки, которые могут возникнуть, если данных еще нет
+            ui.lcdVoltage.display(int (data_blocks[0]))
+            ui.lcdCurrent.display(int (data_blocks[1]))
+            ui.lcdPower.display(int (data_blocks[0])*int (data_blocks[1]))
+        except IndexError:              
+            return
+        except ValueError:
+            return
+    elif (ui.tabWidget.currentIndex() == 2):                         #если открыта вкладка "Отладка", обновляем в ней все данные
+        formatted_time = dt.datetime.now().strftime("%H:%M:%S")
+        textEdit_text = str ((str(formatted_time) + " ->  " + data.data().decode('utf-8',errors="ignore").strip()))
+        ui.textEditDebug.append (textEdit_text)
 
 
 def update_ports():                                                      #функция для обновления списка доступных COM-портов
@@ -24,14 +42,13 @@ def update_time():                                                      #фун�
 
 
 
-
-
 def open_close_port ():                                                 #функция для открытия\закрытия порта
     if (ui.pushButtonConnect.text() == "Подключить"):                   #если открываем порт
         current_port.setPortName (str(ui.comboBoxPort.currentText()))
         current_port.setBaudRate (int(ui.comboBoxSpeed.currentText()))
         current_port.open(QIODevice.OpenModeFlag.ReadWrite)
         if (current_port.isOpen()):
+            sleep (0.5)
             current_port.readyRead.connect (read_data)                  #подключение функции при появлении данных в буфере
             ui.pushButtonConnect.setText("Отключить")
             ui.comboBoxPort.setEnabled(0)
@@ -50,14 +67,13 @@ def open_close_port ():                                                 #фун�
         ui.pushButtonStartStop.setEnabled(0)
 
 def read_data():
-    global data_blocks
-    while (current_port.canReadLine()):
+    global data,data_blocks
+    while (current_port.canReadLine()):                                 #читаем данные и вызываем функцию отображения параметров в интерфейсе
         data = current_port.readLine()
-        data_text = data.data().decode('utf-8',errors="ignore").strip().split('X')[0]
-        data_blocks = data_text.split("A")
+        data_text = data.data().decode('utf-8',errors="ignore").strip().split('X')[0]   #отрезаем часть с "мусором"
+        data_blocks = data_text.split("A")                                              #режем строку по разделителю "А" на  блоки данных
         print (data_blocks)
-        if(data_blocks[0] != None):
-            show_params()
+        show_params()
     
 def fan_speed_checkbox ():                                              #функция для работы со скоростью вентиляторов
     if (str(ui.checkBoxFanMode.checkState()) == "CheckState.Unchecked"):
@@ -68,15 +84,6 @@ def fan_speed_checkbox ():                                              #фун�
         ui.lineEditFanSpeed.setReadOnly (1)
 
 
-def show_params():
-    global data_blocks
-    if (ui.tabWidget.currentIndex() == 0):                              #если открыта вкладка "Мониторинг", обновляем в ней все данные
-        try:
-            ui.lcdVoltage.display(int (data_blocks[0]))
-            ui.lcdCurrent.display(int (data_blocks[1]))
-            ui.lcdPower.display(int (data_blocks[0])*int (data_blocks[1]))
-        except ValueError:
-            pass
 
 
 ui = uic.loadUi("C:\\Users\\Alexandr\\Documents\\GitHub\\Python-projects\\qt_serial\\my.ui")
