@@ -8,24 +8,29 @@ current_port = QSerialPort ()
 timer = QTimer()
 data_blocks = list()                                                     #глобальная перменная для хранения блоков полученных данных
 data = ""
-
+fan_update_flag = 1                                                      #глобальная переменная для выключения обновления показаний скорости вентиляторов при ручной регулировке
 
 def show_params():                                                      #функция  для обработки и обновления данных в  интерфейсе
-    global data,data_blocks                                                  
-    if (ui.tabWidget.currentIndex() == 0):                              #если открыта вкладка "Мониторинг", обновляем в ней все данные
-        try:                                                            #обрабатываем ошибки, которые могут возникнуть, если данных еще нет
-            ui.lcdVoltage.display(int (data_blocks[0]))
-            ui.lcdCurrent.display(int (data_blocks[1]))
-            ui.lcdPower.display(int (data_blocks[0])*int (data_blocks[1]))
-        except IndexError:              
-            return
-        except ValueError:
-            return
-    elif (ui.tabWidget.currentIndex() == 2):                         #если открыта вкладка "Отладка", обновляем в ней все данные
-        formatted_time = dt.datetime.now().strftime("%H:%M:%S")
-        textEdit_text = str ((str(formatted_time) + " ->  " + data.data().decode('utf-8',errors="ignore").strip()))
-        ui.textEditDebug.append (textEdit_text)
-
+    global data,data_blocks,fan_update_flag                                                  
+    match ui.tabWidget.currentIndex():                              #если открыта вкладка "Мониторинг", обновляем в ней все данные
+        case [1]:
+            try:                                                            #обрабатываем ошибки, которые могут возникнуть, если данных еще нет
+                ui.lcdVoltage.display(int (data_blocks[0]))
+                ui.lcdCurrent.display(int (data_blocks[1]))
+                ui.lcdPower.display(int (data_blocks[0])*int (data_blocks[1]))
+                #заготовка для обновления скорости внетилтяоров
+                if (fan_update_flag == 1):
+                    pass
+            except IndexError:              
+                return
+            except ValueError:
+                return
+        case [2]:                         #если открыта вкладка "Отладка", обновляем в ней все данные
+            formatted_time = dt.datetime.now().strftime("%H:%M:%S")
+            textEdit_text = str ((str(formatted_time) + " ->  " + data.data().decode('utf-8',errors="ignore").strip()))
+            ui.textEditDebug.append (textEdit_text)
+        case [3]:
+            pass
 
 def update_ports():                                                      #функция для обновления списка доступных COM-портов
     ui.comboBoxPort.clear()
@@ -39,7 +44,6 @@ def update_ports():                                                      #фун
 
 def update_time():                                                      #функция для обновления времени внизу окна
     ui.time_label.setText (f"Время: {dt.datetime.now().strftime("%H:%M:%S")}")
-
 
 
 def open_close_port ():                                                 #функция для открытия\закрытия порта
@@ -66,6 +70,14 @@ def open_close_port ():                                                 #фун�
         ui.pushButtonUpdatePortList.setEnabled(1)
         ui.pushButtonStartStop.setEnabled(0)
 
+def startup_routine ():
+    if (ui.pushButtonStartStop.text() == "Старт"):
+        ui.pushButtonStartStop.setText("Стоп") 
+    elif (ui.pushButtonStartStop.text() == "Стоп"):
+        ui.pushButtonStartStop.setText ("Старт")
+
+
+
 def read_data():
     global data,data_blocks
     while (current_port.canReadLine()):                                 #читаем данные и вызываем функцию отображения параметров в интерфейсе
@@ -73,17 +85,32 @@ def read_data():
         data_text = data.data().decode('utf-8',errors="ignore").strip().split('X')[0]   #отрезаем часть с "мусором"
         data_blocks = data_text.split("A")                                              #режем строку по разделителю "А" на  блоки данных
         print (data_blocks)
+        while (ui.pushButtonStartStop.text() == "Старт"):
+            return
         show_params()
-    
-def fan_speed_checkbox ():                                              #функция для работы со скоростью вентиляторов
+
+def fan_speed_checkbox ():                                              #функция для обработки переключения режима управления скоростью вентиляторов
+    global fan_update_flag
     if (str(ui.checkBoxFanMode.checkState()) == "CheckState.Unchecked"):
         ui.pushButtonFanSpeed.setEnabled(1)
         ui.lineEditFanSpeed.setReadOnly (0)
+        fan_update_flag = 0
     elif (str(ui.checkBoxFanMode.checkState()) == "CheckState.Checked"):
         ui.pushButtonFanSpeed.setEnabled(0)
         ui.lineEditFanSpeed.setReadOnly (1)
+        fan_update_flag = 1
 
 
+
+
+def set_fan_speed ():                                                   #функция обработки и отправки скорости вентиляторов
+    try:
+        fan_speed = int (ui.lineEditFanSpeed.text())
+        if (fan_speed > 0):
+            #сюда нужно написать формирование пакета и его отправку по UART на STM32
+            print (fan_speed)
+    except ValueError:
+        pass
 
 
 ui = uic.loadUi("C:\\Users\\Alexandr\\Documents\\GitHub\\Python-projects\\qt_serial\\my.ui")
@@ -98,6 +125,8 @@ timer.start(1000)
 
 ui.pushButtonUpdatePortList.clicked.connect (update_ports)
 ui.pushButtonConnect.clicked.connect(open_close_port)
+ui.pushButtonStartStop.clicked.connect(startup_routine)
+ui.pushButtonFanSpeed.clicked.connect (set_fan_speed)
 ui.checkBoxFanMode.checkStateChanged.connect (fan_speed_checkbox)
 timer.timeout.connect (update_time)
 
