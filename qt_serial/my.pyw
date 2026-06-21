@@ -1,6 +1,7 @@
 from PyQt6 import QtWidgets,uic
 from PyQt6.QtSerialPort import QSerialPort,QSerialPortInfo
 from PyQt6.QtCore import QIODevice,QTimer
+from PyQt6.QtGui import QIntValidator
 import datetime as dt
 from time import sleep
 app = QtWidgets.QApplication([])
@@ -9,6 +10,9 @@ timer = QTimer()
 data_blocks = list()                                                     #глобальная перменная для хранения блоков полученных данных
 data = ""
 fan_update_flag = 1                                                      #глобальная переменная для выключения обновления показаний скорости вентиляторов при ручной регулировке
+
+
+
 
 def show_params():                                                      #функция  для обработки и обновления данных в  интерфейсе
     global data,data_blocks,fan_update_flag                                                  
@@ -116,6 +120,12 @@ def set_fan_speed ():                                                   #фун�
 ui = uic.loadUi("C:\\Users\\Alexandr\\Documents\\GitHub\\Python-projects\\qt_serial\\my.ui")
 ui.setWindowTitle ("Electronic load monitor")
 ui.setFixedSize(ui.size())
+validator = QIntValidator (0,99)
+ui.lineEditFanSpeed.setValidator (validator)
+
+
+
+
 
 update_ports()
 update_time()
