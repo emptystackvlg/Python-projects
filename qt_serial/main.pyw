@@ -69,8 +69,11 @@ def open_close_port ():                                                 #фун�
         current_port.setBaudRate (int(ui.comboBoxSpeed.currentText()))
         current_port.open(QIODevice.OpenModeFlag.ReadWrite)
         if (current_port.isOpen()):
-            sleep (0.5)
             current_port.readyRead.connect (read_data)                  #подключение функции при появлении данных в буфере
+            message = "OX"                                              #отправка START кода для начала обмена
+            data = QByteArray(message.encode('utf-8'))
+            current_port.write(data)
+            current_port.waitForBytesWritten(1000)
             ui.pushButtonConnect.setText("Отключить")
             ui.comboBoxPort.setEnabled(0)
             ui.comboBoxSpeed.setEnabled(0)
@@ -78,7 +81,14 @@ def open_close_port ():                                                 #фун�
             ui.pushButtonStartStop.setEnabled(1)
             ui.port_label.setText (f"Порт: {ui.comboBoxPort.currentText()} ({(ui.comboBoxSpeed.currentText())})")
 
+
     elif (ui.pushButtonConnect.text() == "Отключить"):                  #если закрываем порт
+        if (current_port.isOpen()):
+            current_port.waitForReadyRead(1000)
+            message = "NX"                                              #отправка STOP кода для начала обмена
+            data = QByteArray(message.encode('utf-8'))
+            current_port.write(data)
+            current_port.waitForBytesWritten(1000)
         current_port.close()
         ui.pushButtonConnect.setText("Подключить")
         ui.port_label.setText ("Порт:")
@@ -129,13 +139,13 @@ def set_fan_speed ():                                                   #фун�
         if (fan_speed == 0):
             message = "bx"
             data = QByteArray(message.encode('utf-8'))
-            current_port.waitForBytesWritten()
             current_port.write(data)
+            current_port.waitForBytesWritten()
         elif (fan_speed == 1):
             message = "ax"
             data = QByteArray(message.encode('utf-8'))
-            current_port.waitForBytesWritten()
             current_port.write(data)
+            current_port.waitForBytesWritten()
         if (fan_speed >= 0):
             #сюда нужно написать формирование пакета и его отправку по UART на STM32
             print (fan_speed)
