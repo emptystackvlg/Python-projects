@@ -138,6 +138,13 @@
         <height>71</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <italic>false</italic>
+        <fontweight>DemiBold</fontweight>
+       </font>
+      </property>
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Текущее напряжение&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
@@ -148,10 +155,10 @@
        <enum>QFrame::Shadow::Raised</enum>
       </property>
       <property name="smallDecimalPoint">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="digitCount">
-       <number>5</number>
+       <number>7</number>
       </property>
       <property name="segmentStyle">
        <enum>QLCDNumber::SegmentStyle::Flat</enum>
@@ -169,6 +176,13 @@
         <height>71</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <italic>false</italic>
+        <fontweight>DemiBold</fontweight>
+       </font>
+      </property>
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Текущий ток&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
@@ -179,10 +193,10 @@
        <enum>QFrame::Shadow::Raised</enum>
       </property>
       <property name="smallDecimalPoint">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="digitCount">
-       <number>5</number>
+       <number>7</number>
       </property>
       <property name="segmentStyle">
        <enum>QLCDNumber::SegmentStyle::Flat</enum>
@@ -256,6 +270,13 @@
         <height>71</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <italic>false</italic>
+        <fontweight>DemiBold</fontweight>
+       </font>
+      </property>
       <property name="toolTip">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Текущая мощность&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
@@ -266,10 +287,10 @@
        <enum>QFrame::Shadow::Raised</enum>
       </property>
       <property name="smallDecimalPoint">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="digitCount">
-       <number>5</number>
+       <number>7</number>
       </property>
       <property name="segmentStyle">
        <enum>QLCDNumber::SegmentStyle::Flat</enum>
